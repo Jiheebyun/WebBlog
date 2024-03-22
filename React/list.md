@@ -29,10 +29,10 @@ function withExample(WrappedComponent) {
       </pre>
       <pre>
           <code>                 
-              const MyComponent = (props) => <div>{props.extraProp}</div>;
-              const MyEnhancedComponent = withExample(MyComponent);
-              // 다른 컴포넌트의 render 메소드에서
-              <MyEnhancedComponent />
+const MyComponent = (props) => <div>{props.extraProp}</div>;
+const MyEnhancedComponent = withExample(MyComponent);
+// 다른 컴포넌트의 render 메소드에서
+<MyEnhancedComponent />
           </code>
       </pre>
     </ul>
