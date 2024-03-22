@@ -21,9 +21,9 @@
 </details>
               간단한 예 ) 
 ``` js
-function withExample(WrappedComponent) {
-  return function EnhancedComponent(props) {
-    return <WrappedComponent {...props} extraProp="example" />
+  function withExample(WrappedComponent) {
+    return function EnhancedComponent(props) {
+      return <WrappedComponent {...props} extraProp="example" />
+    }
   }
-}
 ```
