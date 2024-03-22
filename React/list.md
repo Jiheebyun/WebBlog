@@ -18,13 +18,13 @@
       </li>
       <li>
           간단한 예 ) 
-          ```JavaScript
-          function withExample(WrappedComponent) {
-            return function EnhancedComponent(props) {
-              return <WrappedComponent {...props} extraProp="example" />
-            }
-          }
-          ```
+```JavaScript
+function withExample(WrappedComponent) {
+  return function EnhancedComponent(props) {
+    return <WrappedComponent {...props} extraProp="example" />
+  }
+}
+```
       </li>
     </ul>
   </div>
