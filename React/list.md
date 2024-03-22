@@ -20,8 +20,10 @@
   </div>
 </details>
               간단한 예 ) 
-        ```javascript
-        require 'redcarpet'
-        markdown = Redcarpet.new("Hello World!")
-        puts markdown.to_html
-        ```
+```js
+function withExample(WrappedComponent) {
+  return function EnhancedComponent(props) {
+    return <WrappedComponent {...props} extraProp="example" />
+  }
+}
+```
