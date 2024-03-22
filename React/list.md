@@ -20,7 +20,8 @@
   </div>
 </details>
               간단한 예 ) 
-``` JavaScript
+              
+```JavaScript
   function withExample(WrappedComponent) {
     return function EnhancedComponent(props) {
       return <WrappedComponent {...props} extraProp="example" />
