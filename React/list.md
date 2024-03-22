@@ -20,26 +20,20 @@
  간단한 예 ) 
       <pre>
         <code>
-                    간단한 예 ) 
-```JavaScript
 function withExample(WrappedComponent) {
   return function EnhancedComponent(props) {
     return <WrappedComponent {...props} extraProp="example" />
   }
 }
-```
         </code>
       </pre>
             <pre>
         <code>
-                    간단한 예 ) 
-```JavaScript
 const MyComponent = (props) => <div>{props.extraProp}</div>;
 const MyEnhancedComponent = withExample(MyComponent);
 
 // 다른 컴포넌트의 render 메소드에서
 <MyEnhancedComponent />
-```
         </code>
       </pre>
     </ul>
