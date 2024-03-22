@@ -3,9 +3,9 @@
 
 --------------------------------------------------------------------------------------------------------
 
-#### HOC Component = Higher Order Component
+#### HOC Component: Higher Order Component
 <details>
-  <summary>HOC Component = 고차 컴포넌트 </summary>
+  <summary>HOC Component</summary>
   <div markdown="1">
     <ul>
       <li>
