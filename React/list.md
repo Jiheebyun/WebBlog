@@ -3,9 +3,9 @@
 
 --------------------------------------------------------------------------------------------------------
 
-#### HOC Component: Higher Order Component
+
 <details>
-  <summary>HOC Component</summary>
+  <summary>HOC Component: Higher Order Component</summary>
   <div markdown="1">
     <ul>
       <li>
