@@ -16,14 +16,17 @@
       <li>
         고차 컴포넌트를 만들때는, 커스텀 훅을 만들때처럼 use를 붙여 네이밍을 하듯이, "with"을 붙어 네이밍을 하는 컨벤션이 존재한다
       </li>
-        간단한 예 ) 
-        ```JavaScript
-          function withExample(WrappedComponent) {
-            return function EnhancedComponent(props) {
-              return <WrappedComponent {...props} extraProp="example" />
-            }
-          }
-        ```
+      <li>
+간단한 예 ) 
+```JavaScript
+function withExample(WrappedComponent) {
+  return function EnhancedComponent(props) {
+    return <WrappedComponent {...props} extraProp="example" />
+  }
+}
+```
+      </li>
+
     </ul>
   </div>
 </details>
