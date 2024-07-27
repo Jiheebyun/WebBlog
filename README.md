@@ -5,6 +5,19 @@
 
 ## React: useState
 
+```jsx
+function useState*(initialValue){
+  let internalState = initialValue
+
+  function setState(newValue){
+    internalState = newValue
+  }
+
+  return [ internalState, setState ]
+}
+```
+
+
 - 이 코드에서 `setValue`를 호출해도 `value` 값이 변경되지 않는 이유는 `useState`가 React 컴포넌트의 상태를 관리하는 방식 때문이다.
 
 ```jsx
