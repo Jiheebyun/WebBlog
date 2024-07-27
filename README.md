@@ -5,6 +5,8 @@
 
 ## React: useState 
 
+- useState 어떤 구조가지고 있는지 고민해보자
+
 ```jsx
 function useState*(initialValue){
   let internalState = initialValue
