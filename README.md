@@ -7,8 +7,7 @@
 
 - useState 어떤 구조가지고 있는지 고민해보자
 
-
-[참조명]: 링크 주소
+[참조]: 모던리액트 Deep Dive
 ```jsx
 function useState*(initialValue){
   let internalState = initialValue
