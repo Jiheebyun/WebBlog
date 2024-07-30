@@ -104,7 +104,8 @@ year: 2023
 <details>
   <summary>rss서비스가 제공하는 Xml 파싱</summary>
   ## Xml json Yaml 데이터
-아래는 fetch를 사용하여 RSS 피드를 가져오고, TextDecoder를 사용하여 인코딩 문제를 해결하는 방법을 포함한 코드입니다.
+  <br/>
+아래는 fetch를 사용하여 RSS 피드를 가져오고, TextDecoder를 사용하여 인코딩 
 
 
 ```jsx
