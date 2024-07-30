@@ -99,6 +99,73 @@ year: 2023
 </details>
 
 
+<details>
+  <summary>rss서비스가 제공하는 Xml 파싱</summary>
+  ## Xml json Yaml 데이터
+// RSSItem 클래스 정의
+class RSSItem {
+    constructor(title, link, description, pubDate) {
+        this.title = title;
+        this.link = link;
+        this.description = description;
+        this.pubDate = pubDate;
+    }
+
+    toString() {
+        return `RSSItem(title=${this.title}, link=${this.link}, description=${this.description}, pubDate=${this.pubDate})`;
+    }
+}
+
+// XML 데이터를 RSSItem 객체로 변환하는 함수
+function parseRSS(xml) {
+    const items = [];
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xml, "application/xml");
+    const itemElements = xmlDoc.getElementsByTagName("item");
+
+    for (let item of itemElements) {
+        const title = item.getElementsByTagName("title")[0].textContent;
+        const link = item.getElementsByTagName("link")[0].textContent;
+        const description = item.getElementsByTagName("description")[0].textContent;
+        const pubDate = item.getElementsByTagName("pubDate")[0].textContent;
+
+        items.push(new RSSItem(title, link, description, pubDate));
+    }
+
+    return items;
+}
+
+// URL에서 RSS 피드를 가져오고 객체로 변환하는 함수
+async function fetchRSSFeed(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const buffer = await response.arrayBuffer();
+        const decoder = new TextDecoder('utf-8');
+        const xml = decoder.decode(buffer);
+        
+        const rssItems = parseRSS(xml);
+        return rssItems;
+    } catch (error) {
+        console.error("Failed to fetch RSS feed:", error);
+    }
+}
+
+// 사용 예제
+const rssUrl = 'https://example.com/rss';
+fetchRSSFeed(rssUrl).then(rssItems => {
+    if (rssItems) {
+        rssItems.forEach(item => console.log(item.toString()));
+    }
+});
+
+</details>
+
+
+
 
 
 
