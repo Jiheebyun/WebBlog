@@ -104,67 +104,61 @@ year: 2023
   ## Xml json Yaml 데이터
 아래는 fetch를 사용하여 RSS 피드를 가져오고, TextDecoder를 사용하여 인코딩 문제를 해결하는 방법을 포함한 코드입니다.
 
-javascript
-코드 복사
-// RSSItem 클래스 정의
-class RSSItem {
-    constructor(title, link, description, pubDate) {
-        this.title = title;
-        this.link = link;
-        this.description = description;
-        this.pubDate = pubDate;
-    }
 
+```jsx
+
+// RSSItem 생성 함수
+const createRSSItem = (title, link, description, pubDate) => ({
+    title,
+    link,
+    description,
+    pubDate,
     toString() {
         return `RSSItem(title=${this.title}, link=${this.link}, description=${this.description}, pubDate=${this.pubDate})`;
     }
-}
+});
 
-// XML 데이터를 RSSItem 객체로 변환하는 함수
-function parseRSS(xml) {
-    const items = [];
+// XML 데이터를 파싱하여 RSSItem 배열로 변환하는 함수
+const parseRSS = (xml) => {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xml, "application/xml");
-    const itemElements = xmlDoc.getElementsByTagName("item");
+    const items = Array.from(xmlDoc.getElementsByTagName("item"));
 
-    for (let item of itemElements) {
-        const title = item.getElementsByTagName("title")[0].textContent;
-        const link = item.getElementsByTagName("link")[0].textContent;
-        const description = item.getElementsByTagName("description")[0].textContent;
-        const pubDate = item.getElementsByTagName("pubDate")[0].textContent;
+    return items.map(item => createRSSItem(
+        item.getElementsByTagName("title")[0].textContent,
+        item.getElementsByTagName("link")[0].textContent,
+        item.getElementsByTagName("description")[0].textContent,
+        item.getElementsByTagName("pubDate")[0].textContent
+    ));
+};
 
-        items.push(new RSSItem(title, link, description, pubDate));
-    }
-
-    return items;
-}
-
-// URL에서 RSS 피드를 가져오고 객체로 변환하는 함수
-async function fetchRSSFeed(url) {
+// URL에서 RSS 피드를 가져오고 파싱된 RSSItem 배열을 반환하는 함수
+const fetchRSSFeed = async (url) => {
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const buffer = await response.arrayBuffer();
         const decoder = new TextDecoder('utf-8');
         const xml = decoder.decode(buffer);
-        
-        const rssItems = parseRSS(xml);
-        return rssItems;
+
+        return parseRSS(xml);
     } catch (error) {
         console.error("Failed to fetch RSS feed:", error);
+        return [];
     }
-}
+};
 
 // 사용 예제
 const rssUrl = 'https://example.com/rss';
 fetchRSSFeed(rssUrl).then(rssItems => {
-    if (rssItems) {
-        rssItems.forEach(item => console.log(item.toString()));
-    }
+    rssItems.forEach(item => console.log(item.toString()));
 });
+
+
+```
 </details>
 
 
