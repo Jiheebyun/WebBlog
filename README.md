@@ -44,6 +44,10 @@ console.log(value); // 0
 
 
 
+## CS:
+
+<details>
+  <summary>Xml Json Yaml 데이터</summary>
 
 ## Xml json Yaml 데이터
 
@@ -91,6 +95,8 @@ year: 2023
 - YAML은 들여쓰기를 통해 데이터를 구조화하며 사람이 읽기 쉽다.
 
 이들 포맷은 각각의 장점과 사용 사례가 다르므로 상황에 맞게 선택해서 사용하면 된다.
+
+</details>
 
 
 
