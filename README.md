@@ -103,8 +103,9 @@ year: 2023
 ## JavaScript:
 <details>
   <summary>rss서비스가 제공하는 Xml 파싱</summary>
-## Xml json Yaml 데이터
-  <br/>
+  ## Xml json Yaml 데이터
+
+  
 아래는 fetch를 사용하여 RSS 피드를 가져오고, TextDecoder를 사용하여 인코딩 
 
 
