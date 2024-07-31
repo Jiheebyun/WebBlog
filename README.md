@@ -202,9 +202,10 @@ iframe은 한 웹 페이지 안에 다른 웹 페이지를 포함시킬 수 있�
 </body>
 </html>
 ```
-
-
-
+설명
+- main.html 파일에는 iframe 태그가 있으며, src 속성을 통해 iframe-content.html 파일을 불러온다.
+- iframe-content.html 파일은 독립된 HTML 문서로, 자신의 <html>, <head>, <body> 태그를 가진다.
+- 브라우저는 main.html을 렌더링할 때, iframe을 만나면 iframe-content.html을 별도로 로드하여 iframe 영역에 표시한다.
 - iframe은 현재 페이지 내에서 별도의 브라우저 창처럼 동작한다.
 - iframe 태그 안에 불러온 문서는 현재 페이지의 일부로 보이지만, 사실은 독립적인 HTML 문서이다.
 
