@@ -100,7 +100,7 @@ year: 2023
 
 
 
-## JavaScript:
+## Web:
 <details>
   <summary>rss서비스가 제공하는 Xml 파싱</summary>
   ## Xml json Yaml 데이터
