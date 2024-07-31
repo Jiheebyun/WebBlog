@@ -166,7 +166,50 @@ fetchRSSFeed(rssUrl).then(rssItems => {
 </details>
 
 
+<details>
+  <summary>iframe이란 </summary>
+## iframe
 
+iframe은 한 웹 페이지 안에 다른 웹 페이지를 포함시킬 수 있는 HTML 요소이다. 이를 통해 외부 콘텐츠를 현재 페이지에 표시할 수 있으며, 주로 다음과 같은 목적으로 사용된다
+즉, 하나의 웹 페이지 내부에 다른 웹 페이지를 불러와서 보여줄 수 있는 기능을 제공한다는 의미이다.
+
+
+현재 페이지 (main.html)
+```jsx
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>이것은 메인 페이지입니다.</h1>
+    <iframe src="iframe-content.html" width="600" height="400"></iframe>
+</body>
+</html>
+
+```
+
+포함된 페이지 (iframe-content.html)
+
+```jsx
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iframe Content</title>
+</head>
+<body>
+    <h1>이것은 iframe 내부의 페이지입니다.</h1>
+</body>
+</html>
+```
+
+
+
+- iframe은 현재 페이지 내에서 별도의 브라우저 창처럼 동작한다.
+- iframe 태그 안에 불러온 문서는 현재 페이지의 일부로 보이지만, 사실은 독립적인 HTML 문서이다.
+
+  
+</details>
 
 
 
