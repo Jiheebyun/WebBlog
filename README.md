@@ -232,7 +232,7 @@ iframe의 사용 목적<br/>
 
 
 ## JavaScript:
-<detail>
+<details>
   <summary>함수 </summary>
   
 
@@ -264,18 +264,17 @@ function outerFunction() {
 ```
 블록 스코프에 명명된 함수 (Block Scoped Named Function)
 블록 스코프에 명명된 함수는 let 또는 const를 사용하여 블록 내에서 정의된 함수이다. 이 함수는 블록 내부에서만 접근할 수 있다. 예를 들어:
-javascript
-코드 복사
+```
 if (true) {
     const blockScopedFunction = function() {
         console.log('블록 스코프에 명명된 함수');
     };
     blockScopedFunction(); // 호출 가능
 }
+```
 블록 스코프에 명명된 함수 (재할당 불가) (Block Scoped Named Function with Immutable Reference)
 const를 사용하여 정의된 블록 스코프 함수는 재할당이 불가능하다. 즉, 해당 블록 내에서 참조를 변경할 수 없다. 예를 들어:
-javascript
-코드 복사
+```
 if (true) {
     const immutableBlockScopedFunction = function() {
         console.log('재할당 불가 블록 스코프 함수');
@@ -283,10 +282,10 @@ if (true) {
     immutableBlockScopedFunction(); // 호출 가능
     // immutableBlockScopedFunction = function() {}; // 오류 발생
 }
+```
 부모 컨텍스트를 상속하는 함수 (Function Inheriting Parent Context)
 자바스크립트에서는 함수가 정의된 위치에 따라 부모 컨텍스트를 상속받는다. 즉, 함수는 자신이 생성된 스코프의 변수와 함수를 참조할 수 있다. 예를 들어:
-javascript
-코드 복사
+```
 function parentFunction() {
     var parentVar = '부모 변수';
     function childFunction() {
@@ -295,16 +294,16 @@ function parentFunction() {
     childFunction();
 }
 parentFunction();
+```
 IIFE (Immediately Invoked Function Expression)
 IIFE는 정의와 동시에 실행되는 함수 표현식이다. 함수 정의 후 즉시 호출되며, 주로 변수의 스코프를 제한하거나 모듈화를 위해 사용된다. 예를 들어:
-javascript
-코드 복사
+```
 (function() {
     console.log('IIFE 함수');
 })();
+```
 
-
-</detail>
+</details>
 
 
 ## Docker:  
