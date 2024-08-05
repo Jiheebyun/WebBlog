@@ -358,7 +358,7 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
   <summary>
     중지된 컨테이너 자동 제거하기 
   </summary>
-### 컨데이너 실행할때 --rm 옵션을 붙이면 컨테이너가 중지되면 자동으로 제거 된다.<br/>
+### 컨데이너 실행할때 --rm 옵션을 붙이면 컨테이너가 중지되면 자동으로 제거 된다.
    docker run -p 3000:80 -d --rm 2ddf2*****fed
 </details>
 
