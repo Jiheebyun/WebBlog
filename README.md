@@ -354,7 +354,13 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
 -a -i 옵션을 함께 사용하면 컨테이너의 표준 입출력 스트림에 모두 연결되고, 표준 입력이 열려 있어 상호작용이 가능하다.
 -a 옵션만 사용하면 특정 스트림(표준 출력 등)에만 연결되며, 상호작용은 불가능하다.   
 </details>
-
+<details>
+  <summary>
+    중지된 컨테이너 자동 제거하기 
+  </summary>
+  ### 컨데이너 실행할때 --rm 옵션을 붙이면 컨테이너가 중지되면 자동으로 제거 된다.
+   docker run -p 3000:80 -d --rm 2ddf2*****fed
+</details>
 
 
 
