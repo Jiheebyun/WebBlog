@@ -333,7 +333,7 @@ Ctrl+C를 눌러도 컨테이너는 계속 실행된다.
 </details>
 
 <details>
-  <summary>attach options -a -i</summary>
+  <summary>도커 실행시 options -a -i</summary>
 
 도커를 실행할 때 사용하는 -a와 -i 옵션은 컨테이너의 입출력 연결 방식에 영향을 준다.
 
