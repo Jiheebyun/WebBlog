@@ -366,7 +366,7 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
 </details>
 
 <details>
-  <summary>컨데이너 검사</summary>
+  <summary>이미지 검사</summary>
   
 도커(Docker) 이미지를 검사하는 방법은 다음과 같다:
 
