@@ -365,6 +365,64 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
    docker run -p 3000:80 -d --rm 2ddf2*****fed
 </details>
 
+<details>
+  <summary>컨데이너 검사</summary>
+  
+도커(Docker) 이미지를 검사하는 방법은 다음과 같다:
+
+### 1. 이미지 레이어 확인
+- 도커 이미지는 여러 레이어로 구성된다. 각 레이어는 도커 파일에서 작성된 명령의 결과로 생성된다.
+- `docker history` 명령어를 사용하면 이미지의 레이어와 각 레이어의 크기를 확인할 수 있다.
+
+  ```bash
+  docker history <이미지 이름 또는 ID>
+  ```
+
+### 2. 이미지 메타데이터 확인
+- `docker inspect` 명령어를 사용하면 이미지의 메타데이터(예: 환경 변수, 명령어, 볼륨, 네트워크 설정 등)를 확인할 수 있다.
+
+  ```bash
+  docker inspect <이미지 이름 또는 ID>
+  ```
+
+### 3. 이미지 콘텐츠 확인
+- 이미지에 포함된 파일들을 확인하고 싶다면, `docker run` 명령어를 사용하여 임시 컨테이너를 생성하고 그 내부를 탐색할 수 있다.
+
+  ```bash
+  docker run --rm -it <이미지 이름 또는 ID> /bin/sh
+  ```
+
+  또는 컨테이너 내부의 특정 경로를 확인하고 싶을 때는 다음과 같이 명령을 실행할 수 있다:
+
+  ```bash
+  docker run --rm -it <이미지 이름 또는 ID> ls /경로
+  ```
+
+### 4. 보안 검사
+- 도커 이미지의 보안 취약점을 검사하기 위해 `Clair`, `Anchore`, `Trivy`와 같은 도구를 사용할 수 있다.
+  - 예를 들어 `Trivy`를 사용하여 보안 취약점을 검사할 수 있다.
+
+  ```bash
+  trivy image <이미지 이름 또는 ID>
+  ```
+
+### 5. 이미지 빌드 로그 확인
+- 도커 이미지를 빌드할 때 어떤 단계에서 문제가 발생했는지 확인하려면, 빌드 로그를 분석할 수 있다.
+- `docker build` 명령어를 사용할 때 `--progress=plain` 옵션을 추가하면 빌드 로그를 더 자세히 확인할 수 있다.
+
+  ```bash
+  docker build --progress=plain -t <이미지 이름> .
+  ```
+
+이 방법들을 사용하여 도커 이미지를 상세히 검사하고 필요한 정보를 얻을 수 있다.
+
+
+</details>
+
+<details>
+  <summary>form</summary>
+</details>
+
 
 
 
