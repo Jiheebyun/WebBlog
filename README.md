@@ -330,7 +330,20 @@ window.addEventListener('input', debounce(function(e) {
 }, 200));
 ```
 
+1. 페이지 로드 시
 
+브라우저가 window.addEventListener('input', debounce(...)) 코드를 실행한다. 이때 debounce 함수가 호출된다.
+debounce 함수는 내부적으로 timer 변수를 초기화하고, 새로운 함수를 반환한다. 이 반환된 함수가 input 이벤트 리스너로 등록된다.
+따라서, input 이벤트가 발생할 때마다 반환된 함수가 실행되게 된다.
+사용자가 입력 필드에 값을 입력할 때
+
+사용자가 키보드를 통해 입력 필드에 텍스트를 입력하면 input 이벤트가 발생한다. 이때, 등록된 디바운스 함수가 실행된다.
+디바운스 함수가 실행되면, 먼저 clearTimeout(timer)를 통해 이전에 설정된 타이머가 있는 경우 이를 취소한다. 이를 통해 이전 이벤트에 대한 처리가 무효화된다.
+이후, setTimeout을 통해 새로운 타이머를 설정한다. 이 타이머는 delay(여기서는 200ms) 이후에 func 함수(이 경우 console.log)를 호출하도록 설정된다.
+사용자가 입력을 멈추고 일정 시간(200ms)이 지나면
+
+사용자가 입력을 멈추고 새로운 input 이벤트가 발생하지 않으면, 마지막으로 설정된 타이머가 만료된다.
+타이머가 만료되면, setTimeout에 의해 설정된 함수가 실행되고, 이 시점에서 console.log("Input value:", e.target.value);가 호출되어 현재 입력된 값이 콘솔에 출력된다.
   
 </details>
 
