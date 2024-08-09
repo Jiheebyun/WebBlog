@@ -327,7 +327,6 @@ function debounce(func, delay) {
 window.addEventListener('input', debounce(function(e) {
     console.log("Input value:", e.target.value);
 }, 200));
-
 ```
 
 
