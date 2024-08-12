@@ -498,6 +498,21 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
 
 이 방법들을 사용하여 도커 이미지를 상세히 검사하고 필요한 정보를 얻을 수 있다.
 
+</details>
+
+<details>
+  <summary>Docker hub: push</summary>
+
+### 도커 허브 로그인
+- 먼저, 로컬 컴퓨터에서 도커 허브에 로그인한다. docker login 명령어를 터미널에서 실행하고, 도커 허브 계정의 사용자 이름과 비밀번호를 입력한다. 이 과정을 통해 도커 허브에 인증된다.
+### 이미지 생성 또는 태그 추가
+- 도커 이미지를 로컬에서 생성하거나 이미 생성된 이미지에 태그를 추가한다. 이미지가 이미 있는 경우 docker tag 명령어를 사용하여 해당 이미지에 도커 허브로 푸시할 때 사용할 태그를 추가한다. 예를 들어, docker tag my-image username/my-image:tag와 같이 한다.
+### 도커 이미지 푸시
+- 도커 이미지를 도커 허브에 푸시한다. docker push username/my-image:tag 명령어를 사용하여 로컬에 있는 이미지를 도커 허브에 업로드한다. 이 과정은 이미지의 크기에 따라 시간이 걸릴 수 있다.
+### 푸시 확인
+- 푸시가 완료된 후, 도커 허브에 로그인하여 업로드된 이미지를 확인한다. 도커 허브 웹사이트에서 저장소(repository)를 열어 푸시된 이미지가 제대로 올라갔는지 확인할 수 있다.
+</details>
+
 
 </details>
 
