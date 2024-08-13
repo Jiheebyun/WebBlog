@@ -1,4 +1,4 @@
-
+b
 
 
 #  Web을 위한 블로그 입니다.
@@ -494,6 +494,7 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
 
   ```bash
   docker build --progress=plain -t <이미지 이름> .
+  
   ```
 
 이 방법들을 사용하여 도커 이미지를 상세히 검사하고 필요한 정보를 얻을 수 있다.
