@@ -512,8 +512,6 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
 - 도커 이미지를 도커 허브에 푸시한다. docker push username/my-image:tag 명령어를 사용하여 로컬에 있는 이미지를 도커 허브에 업로드한다. 이 과정은 이미지의 크기에 따라 시간이 걸릴 수 있다.
 ### 푸시 확인
 - 푸시가 완료된 후, 도커 허브에 로그인하여 업로드된 이미지를 확인한다. 도커 허브 웹사이트에서 저장소(repository)를 열어 푸시된 이미지가 제대로 올라갔는지 확인할 수 있다.
-</details>
-
 
 </details>
 
