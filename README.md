@@ -462,7 +462,7 @@ const MyClass = class {
 
 
 <details>
-  <summary> 클래스 싱글톤 패턴: Singleton Pattern</summary>
+  <summary>클래스 싱글톤 패턴: Singleton Pattern</summary>
   
 ### 싱글톤 패턴 
 
