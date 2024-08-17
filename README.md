@@ -463,7 +463,9 @@ const MyClass = class {
 
 <details>
   <summary> 클래스 싱글톤 패턴: Singleton Pattern</summary>
-### 싱글톤 패턴
+  
+### 싱글톤 패턴 
+
 싱글톤 패턴은 소프트웨어 디자인 패턴중 하나로, 특정 클래스의 인스턴스를 단 하나만 생성하고, 그 인스턴스에 접근할수 있는 전역적인 접근 방법을 제공하는 패턴이다. 
 
 ```javascript
