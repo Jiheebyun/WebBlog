@@ -494,6 +494,7 @@ const singleton2 = Singleton.getInstance();
 
 // 하나의 인스턴스만 존재
 // 싱클턴 객체에 접근할떄는 static 함수로 접근해해야한다
+// 하나의 파일안에서 싱글톤 클래스를 참조하면서 **instance1과 instance2**라는 두 개의 인스턴스를 만들 수 없다.
 
 // 두 변수는 같은 인스턴스를 참조합니다.
 console.log(singleton1 === singleton2); // true
