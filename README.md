@@ -458,9 +458,44 @@ const MyClass = class {
 반면, 함수는 평가 단계에서 객체로 생성되어 바로 사용할 수 있다.
 
 즉,클래스의 경우 평가 후 초기화되지 않기 때문에 선언 전에 접근할 수 없다
+</details>
 
 
+<details>
+  <summary> 클래스 싱글톤 패턴: Singleton Pattern</summary>
+### 싱글톤 패턴
+싱글톤 패턴은 소프트웨어 디자인 패턴중 하나로, 특정 클래스의 인스턴스를 단 하나만 생성하고, 그 인스턴스에 접근할수 있는 전역적인 접근 방법을 제공하는 패턴이다. 
 
+```javascript
+class Singleton {
+    private static instance: Singleton;
+
+    private constructor() {
+        // 생성자를 private으로 선언하여 외부에서 접근할 수 없게 합니다.
+    }
+
+    static getInstance(): Singleton {
+        if (!Singleton.instance) {
+            Singleton.instance = new Singleton();
+        }
+        return Singleton.instance;
+    }
+
+    public someMethod() {
+        console.log("Singleton method called");
+    }
+}
+
+// 싱글톤 인스턴스를 가져옵니다.
+const singleton1 = Singleton.getInstance();
+const singleton2 = Singleton.getInstance();
+
+// 두 변수는 같은 인스턴스를 참조합니다.
+console.log(singleton1 === singleton2); // true
+
+```
+
+  
 </details>
 
 
