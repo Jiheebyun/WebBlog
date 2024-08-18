@@ -526,7 +526,7 @@ console.log(singleton1 === singleton2); // true
 <details>
   <summary>팩토리 패턴: Factory Pattern</summary>
 
-### 팩톨리 패턴이란? 
+### 팩토리 패턴이란? 
 
 ### 팩토리 패턴의 개념
 
