@@ -640,8 +640,76 @@ document.addEventListener('DOMContentLoaded', () => {
 컴포넌트 생성로직을 한 곳에 모아 관리함으로써 코드의 가독성을 높이고, 유지보수 및 확장성을 쉽게 할수 있다
 이러한 패턴을 통해 웹 애플리케이션을 더ㄱ 효율적으로 모듈화된 구조로 설계할 수 있다.
 
-  
 </details>
+
+<details>
+  <summary>옵저버 패턴 : Observer Pattern</summary>
+
+  ### 옵저버 패턴??
+  옵저버 디자인 패턴(Observer Design Pattern)은 객체의 상태가 변경될 때, 그 객체에 의존하는 다른 객체들에게 자동으로 통보하고 업데이트할 수 있도록 하는 패턴이다. 이 패턴은 주로 객체 간의 일대다(one-to-many) 관계를 설정하여, 하나의 객체(주체)의 상태 변화가 여러 다른 객체들(옵저버)에게 전파되도록 한다.
+
+- 주체(Subject): 상태를 가지고 있으며, 상태가 변경될 때 이를 감지하고, 등록된 옵저버들에게 알리는 역할을 한다. 주체는 옵저버의 목록을 관리하고, 상태 변경 시 notifyObservers 메소드를 통해 모든 옵저버에게 통보한다.
+- 옵저버(Observer): 주체의 상태 변화에 반응하는 객체이다. 옵저버는 주체의 상태가 변경되었을 때 update 메소드를 호출받아 자신의 상태를 업데이트하거나 적절한 작업을 수행한다.
+
+### 주요 구성 요소
+1. Subject (주체):
+- 주체는 상태를 저장하고 있으며, 상태 변화가 발생할 때 옵저버들에게 알린다.
+- 주체는 옵저버를 추가하거나 제거할 수 있는 메소드를 제공한다.
+2. Observer (옵저버):
+- 옵저버는 주체의 상태 변화에 반응하여 자신의 상태를 업데이트하거나 특정 동작을 수행한다.
+- 옵저버는 주체의 상태가 변경되었을 때 호출되는 update 메소드를 정의한다.
+
+
+```javascript
+// Subject (주체)
+class WeatherStation {
+    constructor() {
+        this.temperature = null;
+        this.observers = [];
+    }
+
+    addObserver(observer) {
+        this.observers.push(observer);
+    }
+
+    removeObserver(observer) {
+        this.observers = this.observers.filter(obs => obs !== observer);
+    }
+
+    setTemperature(newTemperature) {
+        this.temperature = newTemperature;
+        this.notifyObservers();
+    }
+
+    notifyObservers() {
+        this.observers.forEach(observer => observer.update(this.temperature));
+    }
+}
+
+// Observer (옵저버)
+class TemperatureDisplay {
+    update(temperature) {
+        console.log(`The temperature is now ${temperature}°C`);
+    }
+}
+
+// 사용 예제
+const weatherStation = new WeatherStation();
+const display = new TemperatureDisplay();
+
+weatherStation.addObserver(display);
+
+weatherStation.setTemperature(25);
+// 출력: The temperature is now 25°C
+
+weatherStation.setTemperature(30);
+// 출력: The temperature is now 30°C
+
+
+```
+  - update 메소드는 옵저버 디자인 패턴에서 옵저버 객체가 상태 변경에 반응하기 위해 정의하는 메소드이다. 이 메소드는 주체(Subject)의 상태가 변경될 때 호출되며, 옵저버는 이 메소드를 통해 상태의 새로운 값을 받고 그에 맞는 작업을 수행한다.
+</details>
+
 
 
 
