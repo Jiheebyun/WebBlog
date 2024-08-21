@@ -708,6 +708,90 @@ weatherStation.setTemperature(30);
 
 ```
   - update 메소드는 옵저버 디자인 패턴에서 옵저버 객체가 상태 변경에 반응하기 위해 정의하는 메소드이다. 이 메소드는 주체(Subject)의 상태가 변경될 때 호출되며, 옵저버는 이 메소드를 통해 상태의 새로운 값을 받고 그에 맞는 작업을 수행한다.
+
+### 예시
+```javascript
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutationObserver 클래스 예제</title>
+</head>
+<body>
+    <h1>MutationObserver로 엘리먼트 감시하기</h1>
+
+    <!-- 감시할 엘리먼트 -->
+    <div id="observedElement">
+        <p>이곳의 내용이 변경될 것입니다.</p>
+    </div>
+
+    <!-- 버튼들 -->
+    <button id="changeTextBtn">텍스트 변경</button>
+    <button id="addChildBtn">자식 요소 추가</button>
+    <button id="changeAttributeBtn">속성 변경</button>
+
+    <script>
+        class ElementObserver {
+            constructor(targetNode) {
+                this.targetNode = targetNode;
+                this.observer = new MutationObserver(this.handleMutations.bind(this));
+            }
+
+            // 감지된 변화를 처리하는 메소드
+            handleMutations(mutationsList) {
+                for (let mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        console.log('자식 노드가 변경되었습니다.');
+                    } else if (mutation.type === 'attributes') {
+                        console.log(`엘리먼트 속성 ${mutation.attributeName}이(가) 변경되었습니다.`);
+                    }
+                }
+            }
+
+            // 감시를 시작하는 메소드
+            startObserving() {
+                const config = { attributes: true, childList: true, subtree: true };
+                console.log(config)
+                this.observer.observe(this.targetNode, config);
+            }
+
+            // 감시를 중단하는 메소드
+            stopObserving() {
+                this.observer.disconnect();
+            }
+        }
+
+        // 감시할 대상 엘리먼트 선택
+        
+        const targetNode = document.getElementById('observedElement');
+
+        // ElementObserver 인스턴스 생성 및 감시 시작
+        const elementObserver = new ElementObserver(targetNode);
+        elementObserver.startObserving();
+
+        // 버튼 클릭 이벤트 핸들러
+        document.getElementById('changeTextBtn').addEventListener('click', () => {
+            targetNode.innerHTML = '<p>새로운 텍스트입니다.</p>';
+        });
+
+        document.getElementById('addChildBtn').addEventListener('click', () => {
+            const newElement = document.createElement('p');
+            newElement.textContent = '추가된 자식 요소입니다.';
+            targetNode.appendChild(newElement);
+        });
+
+        document.getElementById('changeAttributeBtn').addEventListener('click', () => {
+            targetNode.setAttribute('data-status', 'changed');
+        });
+    </script>
+</body>
+</html>
+
+```
+
+
 </details>
 
 
