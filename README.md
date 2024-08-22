@@ -924,13 +924,6 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
 
 
 
-
-
-
-
-
-
-
 <details>
   <summary>form</summary>
 </details>
