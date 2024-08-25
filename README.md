@@ -812,6 +812,7 @@ attach 모드는 도커 컨테이너의 표준 입력(stdin), 표준 출력(stdo
 터미널에서 직접 명령어를 입력할 수 있다.
 Ctrl+C를 누르면 컨테이너가 종료된다.
 
+
 <details>
   <summary>장식자 패턴: Decorator Pattern</summary>
   
