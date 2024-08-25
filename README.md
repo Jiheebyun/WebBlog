@@ -813,6 +813,8 @@ attach 모드는 도커 컨테이너의 표준 입력(stdin), 표준 출력(stdo
 Ctrl+C를 누르면 컨테이너가 종료된다.
 
 
+
+
 <details>
   <summary>장식자 패턴: Decorator Pattern</summary>
   
@@ -838,8 +840,6 @@ ConcreteComponent 클래스를 통해 Component 인터페이스를 실제로 구
 Decorator 추상 클래스를 정의하여, Component 객체를 감싸는 구조를 만든다. ConcreteComponent 객체를 포함하고, 기능을 추가할 수 있는 기초를 제공한다.
 - 구체적인 장식자 구현:
 ConcreteDecorator 클래스를 통해 Decorator를 상속받아, 실제로 추가적인 기능을 구현한다. 추가된 기능이나 상태를 유지하며, 기본 기능을 확장하는 역할을 한다.
-
-
   
 </details>
 
