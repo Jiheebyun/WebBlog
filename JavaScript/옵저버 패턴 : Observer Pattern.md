@@ -16,6 +16,10 @@
 - 옵저버는 주체의 상태가 변경되었을 때 호출되는 update 메소드를 정의한다.
 
 
+
+
+  
+
 ```javascript
 // Subject (주체)
 class WeatherStation {
