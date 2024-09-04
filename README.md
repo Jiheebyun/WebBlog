@@ -404,6 +404,8 @@ docker run -a stdin -a stdout -a stderr -i <image> 또는 docker run -a -i <imag
 
 1. docker 부분옮기기
 2. 오저버패턴 적용해서 사용하기
+3. 모듈 만들어보기 
+
 
 
 
