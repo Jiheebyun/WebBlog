@@ -150,6 +150,73 @@ weatherStation.setTemperature(30);
 </html>
 
 ```
+</details>
+
+
+<details>
+  <summary>옵저버 패턴 : 돔요소 감지 설계</summary>
+
+
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutationObserver 예제</title>
+</head>
+<body>
+    <h1>MutationObserver 예제</h1>
+    <div id="observed-element">여기를 클릭하여 내용을 변경하세요.</div>
+    <button id="change-content">내용 변경</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+```
+
+
+```javascript
+document.addEventListener("DOMContentLoaded", () => {
+    const observedElement = document.getElementById('observed-element');
+    const changeButton = document.getElementById('change-content');
+
+    // MutationObserver 콜백 함수 정의
+    const observerCallback = (mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                console.log('자식 노드가 변경되었습니다.');
+                alert('자식 노드가 변경되었습니다.');
+            } else if (mutation.type === 'attributes') {
+                console.log('속성이 변경되었습니다.');
+                alert('속성이 변경되었습니다.');
+            }
+        }
+    };
+
+    // MutationObserver 인스턴스 생성
+    const observer = new MutationObserver(observerCallback);
+
+    // 옵저버의 설정 객체 정의
+    const config = {
+        attributes: true,
+        childList: true,
+        subtree: true
+    };
+
+    // 옵저버를 대상 노드에 연결
+    observer.observe(observedElement, config);
+
+    // 버튼 클릭 시 내용 변경
+    changeButton.addEventListener('click', () => {
+        observedElement.textContent = '내용이 변경되었습니다!';
+        observedElement.style.color = 'red';
+    });
+});
+
+```
 
 
 </details>
