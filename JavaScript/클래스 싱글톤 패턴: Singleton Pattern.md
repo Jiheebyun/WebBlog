@@ -58,5 +58,39 @@ console.log(singleton1 === singleton2); // true
 
 애플리케이션의 어디에서나 동일한 인스턴스에 접근할 수 있게 되어, 코드의 일관성과 접근성을 유지할 수 있습니다.
 설정이나 로그 기록과 같은 자원을 전역적으로 접근할 수 있습니다.
+
+
+#### 예제
+
+```javascript
+class Logger {
+  constructor() {
+    if (Logger.instance) {
+      return Logger.instance;
+    }
+    this.logs = [];
+    Logger.instance = this;
+  }
+
+  log(message) {
+    this.logs.push(message);
+    console.log(`Log: ${message}`);
+  }
+
+  getLogs() {
+    return this.logs;
+  }
+}
+
+// 사용 예
+const logger1 = new Logger();
+logger1.log('Application started');
+
+const logger2 = new Logger();
+logger2.log('User logged in');
+
+console.log(logger1.getLogs()); // ['Application started', 'User logged in']
+console.log(logger1 === logger2); // true
+```
   
 </details>
