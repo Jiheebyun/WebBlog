@@ -41,7 +41,7 @@ console.log(UserModule.isUserLoggedIn()); // 출력: true
 
 
 #### 사용자 인증 모듈 예 
-- 함수형
+### 함수형
 ```javascript
 <!DOCTYPE html>
 <html lang="en">
