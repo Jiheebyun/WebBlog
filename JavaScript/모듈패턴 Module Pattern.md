@@ -197,6 +197,181 @@ console.log(UserModule.isUserLoggedIn()); // 출력: true
 </html>
 
 ```
+</details>
 
+
+<details>
+  <summary>모듈 패턴 예제</summary>
+
+
+  ```javascript
+  // mathUtils.js
+export class MathUtils {
+  // Private fields
+  #history = [];
+
+  static add(a, b) {
+    return a + b;
+  }
+
+  static subtract(a, b) {
+    return a - b;
+  }
+
+  static multiply(a, b) {
+    return a * b;
+  }
+
+  static divide(a, b) {
+    if (b === 0) {
+      throw new Error('Cannot divide by zero');
+    }
+    return a / b;
+  }
+
+  // Instance methods
+  constructor() {
+    this.#history = [];
+  }
+
+  // Private methods
+  #logOperation(operation) {
+    this.#history.push(operation);
+  }
+
+  getHistory() {
+    return this.#history.slice(); // Return a copy of the history
+  }
+
+  performAndLog(operation, ...args) {
+    let result;
+    switch (operation) {
+      case 'add':
+        result = MathUtils.add(...args);
+        break;
+      case 'subtract':
+        result = MathUtils.subtract(...args);
+        break;
+      case 'multiply':
+        result = MathUtils.multiply(...args);
+        break;
+      case 'divide':
+        result = MathUtils.divide(...args);
+        break;
+      default:
+        throw new Error('Invalid operation');
+    }
+    this.#logOperation({ operation, args, result });
+    return result;
+  }
+}
+```
+
+```javascript
+// stringUtils.js
+export class StringUtils {
+  #privatePrefix = 'Prefix: ';
+
+  static capitalize(str) {
+    if (typeof str !== 'string') throw new Error('Input must be a string');
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  static truncate(str, length) {
+    if (typeof str !== 'string') throw new Error('Input must be a string');
+    if (str.length <= length) return str;
+    return str.slice(0, length) + '...';
+  }
+
+  // Instance methods
+  constructor(prefix) {
+    this.#privatePrefix = prefix;
+  }
+
+  #addPrefix(str) {
+    return this.#privatePrefix + str;
+  }
+
+  formatString(str) {
+    return this.#addPrefix(StringUtils.capitalize(str));
+  }
+}
+```
+
+```javascript
+// dateUtils.js
+export class DateUtils {
+  #timezone = 'UTC';
+
+  static formatDate(date, format) {
+    if (!(date instanceof Date)) throw new Error('Input must be a Date object');
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+  }
+
+  static daysBetween(date1, date2) {
+    if (!(date1 instanceof Date && date2 instanceof Date)) {
+      throw new Error('Both inputs must be Date objects');
+    }
+    const diffTime = Math.abs(date2 - date1);
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
+  constructor(timezone) {
+    this.#timezone = timezone;
+  }
+
+  #convertToTimezone(date) {
+    // Dummy implementation for timezone conversion
+    return `${date.toISOString()} ${this.#timezone}`;
+  }
+
+  getCurrentTime() {
+    const now = new Date();
+    return this.#convertToTimezone(now);
+  }
+}
+```
+
+
+```javascript
+// main.js
+import { MathUtils } from './mathUtils.js';
+import { StringUtils } from './stringUtils.js';
+import { DateUtils } from './dateUtils.js';
+
+function runExamples() {
+  try {
+    // MathUtils example
+    console.log('MathUtils:');
+    const math = new MathUtils();
+    console.log('Add: 3 + 4 =', MathUtils.add(3, 4));
+    console.log('Subtract: 10 - 5 =', MathUtils.subtract(10, 5));
+    console.log('Multiply: 2 * 6 =', MathUtils.multiply(2, 6));
+    console.log('Divide: 8 / 2 =', MathUtils.divide(8, 2));
+    
+    // Perform and log operations
+    console.log('Perform and log operations:');
+    console.log('Result:', math.performAndLog('add', 1, 2));
+    console.log('History:', math.getHistory());
+
+    // StringUtils example
+    console.log('\nStringUtils:');
+    const stringUtil = new StringUtils('Mr. ');
+    console.log('Capitalize and add prefix:', stringUtil.formatString('hello world'));
+
+    // DateUtils example
+    console.log('\nDateUtils:');
+    const dateUtil = new DateUtils('GMT');
+    console.log('Current time:', dateUtil.getCurrentTime());
+    console.log('Days between dates:', DateUtils.daysBetween(new Date('2024-01-01'), new Date('2024-12-31')));
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+runExamples();
+```
 
 </details>
