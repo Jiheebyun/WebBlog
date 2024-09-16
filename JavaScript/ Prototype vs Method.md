@@ -21,6 +21,19 @@ const person = new Person('Alice');
 person.sayHello(); // "Hello, my name is Alice"
 
 ```
+
+
+```javascript
+//참고
+const c1 = new Person('jihee')
+console.log(Object.keys(c1)) // Returns instance members
+// {name}
+for (let key in c1) console.log(key) // Returns all members (instance + prototype)
+// {name, sayHello}
+
+```
+
+
 - 프로토 타입은 각각의 객체에서 같은 프로토타입을 참조하고 있으므로, 여러 객체에서 하나의 프로토타입에 접근을 한다 
 
 
