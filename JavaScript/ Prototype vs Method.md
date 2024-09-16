@@ -21,6 +21,8 @@ const person = new Person('Alice');
 person.sayHello(); // "Hello, my name is Alice"
 
 ```
+- 프로토 타입은 각각의 객체에서 같은 프로토타입을 참조하고 있으므로, 여러 객체에서 하나의 프로토타입에 접근을 한다 
+
 
 
 ### 메서드 
