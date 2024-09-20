@@ -62,3 +62,66 @@ c.draw();      // 'draw' 출력
 - 다양한 상속 구조:
 프로토타입 상속은 복잡한 상속 구조를 쉽게 구현할 수 있도록 해준다. 여러 객체가 서로 상속 관계를 형성할 수 있으며, 공통된 기능을 효율적으로 관리할 수 있다.
 </details>
+
+
+
+
+<details>
+  <summary>Polymorphism: 다형성</summary>
+- 동일한 이름의 메서드가 서로 다른 객체에서 다르게 동작하는 특성이다. 이는 객체 지향 프로그래밍의 중요한 개념으로, 다양한 형태의 객체가 동일한 인터페이스를 통해 상호작용할 수 있게 해준다.
+
+#### 예시
+
+```javascript
+
+//Polymorphism
+
+function extend(Child, Parent){
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child
+}
+function Shape(){}
+
+Shape.prototype.duplicate = function() {
+    console.log('duplicate')
+}
+
+
+function Circle(radius) {
+    this.radius = radius
+}
+
+extend(Circle, Shape)
+
+//Overwrite
+Circle.prototype.duplicate = function() {
+    console.log('duplicate circle')
+}
+
+//Polymorphism
+function Square(){}
+
+extend(Square, Shape)
+
+Square.prototype.duplicate = function() {
+    console.log('duplicate square');
+}
+
+const shapes = [
+    new Circle(),
+    new Square()
+]
+
+//Polymorphism in an action
+for (let shape of shapes) {
+    shape.duplicate();
+}
+//duplicate circle
+//duplicate square
+
+const s = new Shape();
+const c = new Circle(1);
+
+```
+
+</details>
