@@ -124,4 +124,41 @@ const c = new Circle(1);
 
 ```
 
+
+#### 예시
+```javascript
+// 동물 클래스
+class Animal {
+    speak() {
+        console.log("동물이 소리내기");
+    }
+}
+
+// 개 클래스
+class Dog extends Animal {
+    speak() {
+        console.log("멍멍");
+    }
+}
+
+// 고양이 클래스
+class Cat extends Animal {
+    speak() {
+        console.log("야옹");
+    }
+}
+
+// 다형성 사용
+function makeAnimalSpeak(animal) {
+    animal.speak();
+}
+
+const dog = new Dog();
+const cat = new Cat();
+
+makeAnimalSpeak(dog); // "멍멍"
+makeAnimalSpeak(cat); // "야옹"
+
+```
+
 </details>
