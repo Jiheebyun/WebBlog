@@ -72,6 +72,8 @@ c.draw();      // 'draw' 출력
 
 #### 예시
 
+
+
 ```javascript
 
 //Polymorphism
