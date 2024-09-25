@@ -41,4 +41,20 @@ proxyPerson.age = 30; // 정상
 - proxyPerson에 age 속성을 30으로 설정한다. set 메소드가 호출되고, 값이 유효하므로 정상적으로 속성이 설정된다.
 - proxyPerson에 age 속성을 150으로 설정하려고 한다. 이 경우 set 메소드에서 유효성 검사가 실패하고, RangeError 오류가 발생한다.
 
+
+### 프록시 동작 원리 
+
+```javascript
+const proxyPerson = new Proxy(person, handler);
+```
+- 이 코드로 proxyPerson이라는 프락시 객체가 생성된다. 이 프락시는 person 객체를 감싸고, handler 객체에 정의된 동작을 사용할 수 있다.
+- proxyPerson은 이제 person 객체를 감싸는 프락시 객체가 된다. 이 객체는 handler에 정의된 동작을 사용할 수 있게 된다.
+
+```javascript
+proxyPerson.name = 'Alice';
+
+```
+- 이 라인에서 proxyPerson에 name 속성을 'Alice'로 설정하려고 한다. 일반 객체라면 그냥 속성을 직접 설정하지만, 프락시의 경우에는 다르게 동작한다.
+
+
 </details>
