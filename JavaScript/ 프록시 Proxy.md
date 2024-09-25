@@ -1,0 +1,44 @@
+<details>
+  <summary>Proxy</summary>
+
+### Proxy
+
+프락시는 자바스크립트의 객체를 감싸는 기능이다. 프락시는 객체의 기본 동작을 가로채고 수정할 수 있는 메커니즘을 제공한다.
+프락시는 new Proxy(target, handler) 구문으로 생성된다. 여기서 target은 감싸고자 하는 원본 객체이고, handler는 동작을 가로채는 메소드를 정의한 객체이다.
+
+프락시는 객체에 접근할 때 추가적인 로직을 삽입할 수 있다. 예를 들어, 속성에 접근할 때 로그를 남기거나, 속성 값을 검증하는 등의 작업을 수행할 수 있다.
+
+### 예시
+
+```javascript
+
+const person = {};
+const handler = {
+    set: function(target, property, value) {
+        if (property === 'age') {
+            if (value < 0 || value > 120) {
+                throw new RangeError('Age must be between 0 and 120.');
+            }
+        }
+        target[property] = value;
+        return true;
+    }
+};
+
+const proxyPerson = new Proxy(person, handler);
+
+proxyPerson.name = 'Alice'; // 정상
+proxyPerson.age = 30; // 정상
+// proxyPerson.age = 150; // 오류 발생: RangeError: Age must be between 0 and 120
+
+```
+
+해당 예제에서는 age 속성에 값을 설정 할때 유효성 검사를 하게 된다. 프록시는 데이터를 보호하고, 유효하지 않은 잘못된 값을 
+설정할 경우에 오류를 발생 시킨다. 객체안에  
+
+-  위의 코드를 보면 new Proxy를 사용하여 person 객체를 감싸는 proxyPerson이라는 프락시 객체를 생성한다. 이 프락시는 handler를 통해 동작을 제어한다.
+- proxyPerson에 name 속성을 'Alice'로 설정한다. 이 경우 set 메소드가 호출되지만, name은 유효성 검사를 필요로 하지 않으므로 정상적으로 속성이 설정된다.
+- proxyPerson에 age 속성을 30으로 설정한다. set 메소드가 호출되고, 값이 유효하므로 정상적으로 속성이 설정된다.
+- proxyPerson에 age 속성을 150으로 설정하려고 한다. 이 경우 set 메소드에서 유효성 검사가 실패하고, RangeError 오류가 발생한다.
+
+</details>
