@@ -71,5 +71,59 @@ function Flyable(Base) {
 
 
 
+### 예시 
+```javascript
 
+// 데이터베이스 믹스인 정의
+const dbMixin = {
+    db: {}, // 간단한 객체로 데이터베이스 역할
+    create(key, value) {
+        this.db[key] = value;
+        console.log(`Created: ${key} -> ${value}`);
+    },
+    read(key) {
+        const value = this.db[key];
+        console.log(`Read: ${key} -> ${value}`);
+        return value;
+    },
+    update(key, value) {
+        if (this.db[key]) {
+            this.db[key] = value;
+            console.log(`Updated: ${key} -> ${value}`);
+        } else {
+            console.log(`Error: ${key} does not exist.`);
+        }
+    },
+    delete(key) {
+        if (this.db[key]) {
+            delete this.db[key];
+            console.log(`Deleted: ${key}`);
+        } else {
+            console.log(`Error: ${key} does not exist.`);
+        }
+    }
+};
+
+// 사용자 객체 생성
+const userDB = {
+    name: 'UserDatabase'
+};
+
+// 믹스인 적용
+applyMixins(userDB, dbMixin);
+
+// 사용 예시
+userDB.create('user1', { name: 'Alice', age: 25 });
+userDB.create('user2', { name: 'Bob', age: 30 });
+
+userDB.read('user1'); // Read: user1 -> [object Object]
+userDB.update('user1', { name: 'Alice', age: 26 });
+userDB.read('user1'); // Read: user1 -> [object Object]
+
+userDB.delete('user2'); // Deleted: user2
+userDB.read('user2');    // Read: user2 -> undefined
+
+
+
+```
 </details>
