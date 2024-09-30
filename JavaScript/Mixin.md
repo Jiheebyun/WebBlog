@@ -123,7 +123,6 @@ userDB.read('user1'); // Read: user1 -> [object Object]
 userDB.delete('user2'); // Deleted: user2
 userDB.read('user2');    // Read: user2 -> undefined
 
-
-
 ```
+
 </details>
