@@ -5,11 +5,6 @@
  
 ```javascript
 
-import { it, expect } from 'vitest';
-// it - first argument is "String",  
-// test -
-import { add } from './math.js';
-
 it("should summerize all number values in an array", () => {
     // Arrange
     const numbers = [1,5456,3]
@@ -25,6 +20,25 @@ it("should summerize all number values in an array", () => {
     expect(result).toBe(expectedResult); 
 });
 
+it("should yield NaN if a least one invalud number is provided", () => {
+    const inputs = ['invalid', 1];
+
+    const result = add(inputs);
+
+    expect(result).toBeNaN(inputs);
+})
+
+it("should yield a correct sum if an array of numeric string values are provided", () => {
+    const numbers = ['1','2'];
+
+    const result = add(numbers);
+
+    const expectedResult = numbers.reduce(
+        (preValue, calValue) => 
+        preValue + calValue, 0
+    )
+    expect(result).toBe(3); 
+})
 ```
 
 #### Arrange
