@@ -25,7 +25,7 @@ it("should yield NaN if a least one invalud number is provided", () => {
 
     const result = add(inputs);
 
-    expect(result).toBeNaN(inputs);
+    expect(result).toBeNaN(result);
 })
 
 it("should yield a correct sum if an array of numeric string values are provided", () => {
