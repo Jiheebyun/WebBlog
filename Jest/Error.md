@@ -17,6 +17,19 @@ it("should throw an error if no value is passed into the function", () => {
     expect(resultFn).toThrow();
 })
 
+
+it("should throw an error if provided with multiple arguments instead of an array", () => {
+    const num1 = 1;
+    const num2 = 2;
+
+    const resultFn = () => {
+        add(num1, num2)
+    };
+
+    expect(resultFn).toThrow(/is not iterable/);
+    //error를 던져야 하고, 특정 에러 메시지를 예상
+})
+
 ```
 #### resultFn
 - resultFn은 return하는 값을 없지만, add()를 호출을 통해서 오류를 발생시키는지 테스트하기 위해 존재한다
