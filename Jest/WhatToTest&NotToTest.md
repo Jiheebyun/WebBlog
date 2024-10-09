@@ -8,7 +8,7 @@
 - only test your code and test one thing.
   - What is "one thing" refer to ? : it is one feature or one behavior such as validate input OR transform it. 
 
-- write separated tests for your backend or frontend code instaed.
+- write separated tests for your backend or frontend code.
 - Do test your client-side reaction to different responses & errors.
 - wirte AAA Pattern's tests.
 - focus on the essence of a test when arranging.
