@@ -8,7 +8,7 @@
 - only test your code and test one thing.
   - What is "one thing" refer to ? : it is one feature or one behavior such as validate input OR transform it. 
 - Splitting functions for easier testing
-  - If a function is too long and is make multiple calls to different functions.
+  - If a function is too long and makes multiple calls to different functions.
 - write separated tests for your backend or frontend code.
 - Do test your client-side reaction to different responses & errors.
 - wirte AAA Pattern's tests.
