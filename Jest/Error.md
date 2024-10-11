@@ -41,5 +41,4 @@ it("should throw an error if provided with multiple arguments instead of an arra
 - expect(resultFn).thThrow() -> resultFn이 오류를 던지는것을 예상, 오류를 던지면 통과
 
 
-
 </details>
