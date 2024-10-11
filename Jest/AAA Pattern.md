@@ -53,4 +53,8 @@ it("should yield a correct sum if an array of numeric string values are provided
 ####  Assert
 - 결과를 검증하는 단계, 기대하는 결과와 실제 결과를 비교하여 테스트의 성공여부를 판단하는 단계이다.
 
+
+
+
+
 </details>
