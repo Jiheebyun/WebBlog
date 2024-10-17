@@ -101,4 +101,29 @@ it('should generate a token value', (done) => {
 - 값이 undefined가 아닌지 확인 확인한다.
 - 사용 예: 비동기 함수가 정상적으로 값을 반환했는지 여부를 확인하고 싶을 때 유용하다. 즉, 반환된 값이 존재해야 할 때 사용한다.
 - 사용 상황: 예를 들어, 사용자의 이메일로부터 생성된 토큰이 반드시 존재해야 한다면 toBeDefined를 사용하여 값이 정의되어 있는지 체크할 수 있다.
+
+
+#### Promise
+
+```javascript
+
+import { it } from 'vitest';
+
+it('should generate a token value', () => {
+  const testUserEmail = 'test@test.com';
+  
+  return expect(generateTokenPromise(testUserEmail)).resolves.toBeFefined();
+  // Don't need to return when using async/await (since a function annotated with async returns a promise implicitly)
+})
+
+it('should generate a token value',  async () => {
+  const testUserEmail = 'test@test.com';
+  const token = await generateTokenPromise(testUserEmail);
+  
+  expect(token).toBeFefined();
+})
+
+
+```
+
 </details>
