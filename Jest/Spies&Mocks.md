@@ -139,5 +139,21 @@ Mock 객체: Mocking을 통해 개발자는 이러한 실제 의존성의 행동
   ##### Mocking Logic
 
 
-  
+##### EX 
+```javascript
+//io.js
+import path from 'path';
+import { promises as fs } from 'fs';
+
+export default function writeData(data, filename) {
+  const storagePath = path.join(process.cwd(), 'data', filename);
+  return fs.writeFile(storagePath, data);
+}
+```
+
+```javascript
+
+```
+
+
 </details>
