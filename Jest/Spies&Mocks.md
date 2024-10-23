@@ -115,3 +115,29 @@ Mock 객체: Mocking을 통해 개발자는 이러한 실제 의존성의 행동
 
 
 </details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<details>
+  <summary>Custom Mocking Logic</summary>
+
+  ##### Mocking Logic
+
+
+  
+</details>
