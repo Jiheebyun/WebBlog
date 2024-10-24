@@ -155,7 +155,38 @@ export default function writeData(data, filename) {
 //Test Code
 
 
+import { it, expect,vi } from 'vitest';
 
+import writeData from './io';
+import { promises as fs } from 'fs';
+
+
+vi.mock('fs')
+vi.mock('path', () => {
+    //own implementation
+    return {
+        default: {
+            join: (...args) => {
+                return args[args.length -1]
+            }
+        }
+    }
+});
+// 이 부분은 path 모듈을 모킹하는 코드이다. 여기서 path.join 메서드를 사용자 정의 구현으로 대체합니다.
+// join 메서드는 일반적으로 여러 경로를 결합하는 데 사용되지만, 이 모킹에서는 모든 인수 중 마지막 인수만 반환하도록 구현되었다. 즉, path.join('a', 'b', 'c')를 호출하면 'c'만 반환된다.
+//모킹된 구현에서 마지막 인수만 반환하면, 이 경우 filename만 반환된다. 예를 들어 path.join(process.cwd(), 'data', 'test.txt')는 'test.txt'를 반환하게 된.
+// 이렇게 하는 이유는 테스트 환경에서 경로 처리를 간단하게 하여 테스트의 의도를 명확하게 하고, 복잡한 경로 결합 로직으로 인한 오류를 피하기 위함이다.
+//참고 :  default라는 이름은 path 모듈을 default방식으로 임포트했기 때문에 default라고 명시되었다.
+// 만약 path as abc 라고 모듈을 임포트 했다면, 모킬을 리털할때, {abc: ...} 모킹을 내보내야한다.
+it('should excute the writeFile method',()=>{
+    const testData = 'Test';
+    const testFilename = 'test.txt';
+
+
+    writeData(testData,testFilename)
+
+    expect(fs.writeFile).toBeCalledWith(testFilename, testData)
+})
 ```
 
 
