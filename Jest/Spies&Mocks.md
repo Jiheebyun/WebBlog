@@ -193,3 +193,54 @@ it('should excute the writeFile method',()=>{
 
 
 </details>
+
+
+
+
+<details>
+  <summary>__mocks__</summary>
+
+Jest에서 __mocks__ 디렉토리는 모듈의 자동 또는 수동으로 설정한 모의(mock) 구현을 제공하는 곳이다. Jest는 테스트를 수행할 때 종속성을 격리하고, 특정 모듈의 동작을 제어하기 위해 모의 기능을 많이 사용한다. __mocks__ 디렉토리를 사용하면 보다 쉽게 모듈을 모의할 수 있다.
+
+```javascript
+// src/myModule.js
+export function fetchData() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("real data");
+    }, 1000);
+  });
+}
+
+// src/__mocks__/myModule.js
+export function fetchData() {
+  return Promise.resolve("mocked data");
+}
+
+// src/myComponent.js
+import { fetchData } from './myModule';
+
+export async function getData() {
+  const data = await fetchData();
+  return data;
+}
+
+```
+
+##### Test Code
+```javascript
+// src/myComponent.test.js
+jest.mock('./myModule'); // myModule을 모킹
+
+import { getData } from './myComponent';
+import * as myModule from './myModule';
+
+test('getData should return mocked data', async () => {
+  const data = await getData(); // 비동기 함수 호출
+  expect(data).toBe('mocked data'); // 모의 데이터 확인
+  expect(myModule.fetchData).toHaveBeenCalled(); // 호출 여부 확인
+});
+
+```
+
+</details>
