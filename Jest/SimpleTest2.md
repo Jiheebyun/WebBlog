@@ -67,6 +67,10 @@ describe('class ValidationError', () => {
 
         expect(testValidationError.message).toBe(testMessage)
     })
+    
+    it('should ', () => {
+
+    })
 })
 ```
 
