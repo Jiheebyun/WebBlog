@@ -67,10 +67,6 @@ describe('class ValidationError', () => {
 
         expect(testValidationError.message).toBe(testMessage)
     })
-    
-    it('should ', () => {
-
-    })
 })
 ```
 
@@ -116,4 +112,61 @@ it('should throw an error with the provided error message', () => {
     expect(validationFn).toThrow(testErrorMessage);
 })
 ```
+
+
+##### HTTP Sample Code 
+```javascript
+import {HttpError} from './errors.js';
+
+export async function sendDataRequest(data) {
+  const response = await fetch('https://dummy-site.dev/posts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw new HttpError(response.status, 'Sending the request failed.', responseData);
+  }
+
+  return responseData;
+}
+```
+
+
+
+```javascript
+import { it, vi, expect } from 'vitest';
+import { sendDataRequest } from './http';
+
+const testResponseData = {testKey: 'testData'}
+
+const testFetch = vi.fn((url, options) => {
+    return new Promise((resolve, reject) => {
+        const testResponse = {
+            ok: true,
+            json() {
+                return new Promise((resolve, reject) => {
+                    resolve(testResponseData);
+                })
+            }
+        };
+        resolve(testResponse);
+    })
+});
+
+vi.stubGlobal('fetch', testFetch);
+
+it('should return any available response data', () => {
+    const testData = {key: 'test'};
+    
+    return expect(sendDataRequest(testData)).resolves.toEqual(testResponseData);
+})
+```
+
+
 </details>
