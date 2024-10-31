@@ -147,6 +147,9 @@ const testResponseData = {testKey: 'testData'}
 
 const testFetch = vi.fn((url, options) => {
     return new Promise((resolve, reject) => {
+        if( typeof options.body !== 'string' ){
+            return reject('Not a string')
+        }
         const testResponse = {
             ok: true,
             json() {
@@ -160,12 +163,25 @@ const testFetch = vi.fn((url, options) => {
 });
 
 vi.stubGlobal('fetch', testFetch);
+// stubGloba() 메서드는 전역 변수를 모킹 할때 사용
+//예를 들어  fetch, window, global, process 등의 특정 속성을 모킹 할수 있다.
 
 it('should return any available response data', () => {
     const testData = {key: 'test'};
     
     return expect(sendDataRequest(testData)).resolves.toEqual(testResponseData);
 })
+it('should covert the provied data to JSON before sending the request', async () => {
+    const testData = {key: 'test'};
+    let errorMessage
+    try {
+
+    } catch (error) {
+        errorMessage = error;
+    }
+    expect(sendDataRequest(testData)).not.toBe('Not a string');
+})
+
 ```
 
 
