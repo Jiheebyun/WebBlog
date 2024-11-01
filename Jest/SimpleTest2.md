@@ -182,6 +182,27 @@ it('should covert the provied data to JSON before sending the request', async ()
     expect(sendDataRequest(testData)).not.toBe('Not a string');
 })
 
+it('should throw an HttpError in case of non-ok responses ', async () => {
+    testFetch.mockImplementationOnce(
+        vi.fn((url, options) => {
+            return new Promise((resolve, reject) => {
+                const testResponse = {
+                    ok: false,
+                    json() {
+                        return new Promise((resolve, reject) => {
+                            resolve(testResponseData);
+                        })
+                    }
+                };
+                resolve(testResponse);
+            })
+        })
+    );
+    
+    const testData = {key: 'test'};
+    expect(sendDataRequest(testData)).rejects.toBeInstanceOf(HttpError);
+})
+
 ```
 
 
