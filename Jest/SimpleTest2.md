@@ -205,5 +205,4 @@ it('should throw an HttpError in case of non-ok responses ', async () => {
 
 ```
 
-
 </details>
