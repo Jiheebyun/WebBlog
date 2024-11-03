@@ -38,6 +38,10 @@ const document = window.document;
 document.write(htmlDoccumentContent);
 vi.stubGlobal('document', document);
 
+beforeEach(() => {
+  document.body.innerHTML = '';
+  document.write(htmlDocumentContent);
+});
 
 it('should add an error paragraph to the id="errors" element', () => {
     showError('Test');
