@@ -58,4 +58,13 @@ gulp.task('sass', () => {
 
 ```
 
+##### 파일 감시 
+```javasript
+
+gulp.task('watch', () => {
+  gulp.watch('src/sass/**/*.scss', gulp.series('sass'));  // Sass 파일 변경 시 sass 작업 실행
+  gulp.watch('src/js/**/*.js', gulp.series('scripts'));  // JS 파일 변경 시 scripts 작업 실행
+});
+
+```
 </details>
