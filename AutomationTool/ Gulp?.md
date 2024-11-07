@@ -20,4 +20,42 @@ Gulp는 설정이 간단하고, 코드가 직관적이다. 작업 흐름을 쉽�
 - 이미지 최적화: 이미지를 압축하여 웹사이트의 로딩 속도를 빠르게 만든다.
 - 파일 복사: HTML, CSS, 이미지 파일 등을 다른 폴더로 자동으로 복사한다.
 
+
+#####  Gulp 기본 설정
+```javasript
+const gulp = require('gulp');  // Gulp 모듈 불러오기
+
+// 예시 작업: 'hello'라는 작업 정의
+gulp.task('hello', (done) => {
+  console.log('Hello, Gulp!');
+  done(); // 작업이 끝났음을 Gulp에 알려줍니다.
+});
+
+```
+
+##### Gulp 작업 설정
+```javasript
+const gulp = require('gulp');  // Gulp 모듈 불러오기
+
+// 예시 작업: 'hello'라는 작업 정의
+gulp.task('hello', (done) => {
+  console.log('Hello, Gulp!');
+  done(); // 작업이 끝났음을 Gulp에 알려줍니다.
+});
+
+```
+##### Gulp 작업 정의 
+```javasript
+// npm install --save-dev gulp-sass
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+
+gulp.task('sass', () => {
+  return gulp.src('src/sass/**/*.scss')  // Sass 파일 경로
+    .pipe(sass().on('error', sass.logError))  // Sass 컴파일
+    .pipe(gulp.dest('dist/css'));  // 결과 파일 저장 경로
+});
+
+```
+
 </details>
