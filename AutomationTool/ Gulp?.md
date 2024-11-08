@@ -67,4 +67,32 @@ gulp.task('watch', () => {
 });
 
 ```
+
+##### CSS 파일 병합 및 압축
+```javasript
+const gulp = require('gulp');
+const concat = require('gulp-concat');  // 파일 병합
+const cleanCSS = require('gulp-clean-css');  // CSS 압축
+
+gulp.task('styles', () => {
+  return gulp.src('src/css/**/*.css')  // CSS 파일 경로
+    .pipe(concat('styles.css'))  // 모든 CSS 파일을 하나로 병합
+    .pipe(cleanCSS())  // CSS 파일 압축
+    .pipe(gulp.dest('dist/css'));  // 결과 파일 저장
+});
+```
+
+##### HTML 파일 처리 
+```javasript
+
+const gulp = require('gulp');
+
+gulp.task('html', () => {
+  return gulp.src('src/**/*.html')  // HTML 파일 경로
+    .pipe(gulp.dest('dist/'));  // HTML 파일 복사
+});
+
+
+```
+
 </details>
