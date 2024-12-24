@@ -20,13 +20,13 @@ DOM 요소에서 특정 이벤트(클릭, 키 입력 등)가 발생하면, 해�
 이벤트 버블링은 “하위 요소에서 발생한 이벤트가 상위 요소까지 단계적으로 전파되는 현상”을 말한다. 예를 들어 <button> 내부에 <span> 태그가 있는 상황에서 <span>을 클릭하더라도, 그 클릭 이벤트가 부모 요소인 <button>으로 전파되어 발생한다는 것이다.
 
 예시 구조
-
+```javascript
 <div id="parent">
   <button id="childButton">
     <span id="innerText">클릭하세요</span>
   </button>
 </div>
-
+```
 위와 같은 구조에서 #innerText 요소를 클릭하면 다음과 같은 순서로 이벤트가 전파된다.
 
 1. 가장 먼저 #innerText에서 이벤트가 발생한다.
