@@ -240,8 +240,6 @@ iframe의 사용 목적<br/>
   <summary>form</summary>
 </details>
 
-1. docker 부분옮기기
-2. 오저버패턴 적용해서 사용하기
 
 
 
