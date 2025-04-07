@@ -91,6 +91,41 @@ async function allSettledDemo() {
 
 
 
+##  Custom Promise
+```javascript
+
+class MyPromise extends Promise {
+  constructor(executor) {
+    super(executor);
+  }
+
+  // 새로운 메서드를 추가할 수도 있습니다.
+  myCustomMethod() {
+    console.log('커스텀 메서드 실행!');
+    return this;
+  }
+}
+
+const mp = new MyPromise((resolve, reject) => {
+  setTimeout(() => resolve('Hello'), 1000);
+});
+//mp.  MyPromise 인스턴스( mp )가 생성
+mp.then(value => { //.then(...)을 호출하는 즉시 시점에 “새로운 MyPromise 인스턴스”가 만들어져 반환, promise의 상태에 따라서 콜백이 실행됨 
+  console.log('기본 then:', value);
+})
+.myCustomMethod() // 여기서 mp의 객체가 아닌, than() 호출로 인해 생성된 객체의 .myCustomMethod()가 실행된다.
+.then(() => {
+  console.log('연결된 then');
+})
+.catch((error) => {
+    console.log('에러 발생:', error);
+});
+
+
+```
+
+
+
 
 
 </details>
