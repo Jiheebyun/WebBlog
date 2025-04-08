@@ -121,9 +121,31 @@ mp.then(value => { //.then(...)을 호출하는 즉시 시점에 “새로운 My
     console.log('에러 발생:', error);
 });
 
-
 ```
 
+```javascript
+function randomRejectResolve() {
+    const p = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            const randomNum = Math.dandom();
+            if(randomNum < 0.5){
+                resolve("Resolve!!")
+            } else {
+                reject("ERROR!")
+            }
+        },3000)
+    })
+    return p
+}
+randomRejectResolve
+    .then((val) => {
+        console.log(val)
+    })
+    .catch((err)=>{
+        console.log(err)
+    });
+
+```
 
 
 
