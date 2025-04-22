@@ -32,7 +32,7 @@ console.log(displayName2); // 'Guest'
 ```
 
 
-##  
+##  numeric seperators
 ```javascript
 
 ```
