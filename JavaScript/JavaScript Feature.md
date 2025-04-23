@@ -42,7 +42,7 @@ console.log(displayName2); // 'Guest'
 
 ```
 
-
+## Map Object vs Object
 
 
 </details>
