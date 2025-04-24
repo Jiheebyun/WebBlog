@@ -44,5 +44,7 @@ console.log(displayName2); // 'Guest'
 
 ## Map Object vs Object
 
+## IIFE: Immediately Invoked Function Expression
+
 
 </details>
