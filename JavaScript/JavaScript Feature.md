@@ -90,12 +90,6 @@ for (const [k, v] of userMap) {
 
 ```
 ### Type
-검사 방법 | {} (plain object) | new Map()
-typeof value | "object" | "object" — 동일!
-value instanceof Object | true | true
-value instanceof Map | false | true
-Object.prototype.toString.call(value) | "[object Object]" | "[object Map]"
-
 
 ```javascript
 const o = {};
