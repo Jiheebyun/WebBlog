@@ -118,4 +118,30 @@ console.log(Object.prototype.toString.call(m));  // [object Map]
 ## IIFE: Immediately Invoked Function Expression
 
 
+```javascript
+// ❶ IIFE — 즉시 실행
+// ❷ 첫 번째 호출 때 매개변수 factor 에 3을 넘김
+// ❸ IIFE가 “곱셈 함수”를 리턴하고, 그 함수는 x 인자를 받아 factor * x 를 반환
+const triple = (function (factor) {
+  // ⬇︎ 이 내부 변수는 클로저에 갇혀서 이후에도 유지됩니다.
+  return function multiply(x) {
+    return factor * x;   // factor 는 3으로 고정
+  };
+})(3);   // ← 여기서 바로 3을 넘겨 즉시 실행
+
+// 사용 예 — 리턴된 함수는 인자를 받아 동작
+console.log(triple(4)); // 12
+console.log(triple(7)); // 21
+```
+
+### 동작흐름
+- 1. IIFE 정의와 동시에 호출
+(function (factor) { … })(3) 에서 마지막 (3) 부분이 IIFE를 즉시 실행하며 factor에 3을 전달합니다.
+
+- 2. 클로저(closure) 형성
+IIFE 내부에서 factor(=3)는 사라지지 않고, 리턴된 multiply 함수의 렉시컬 환경에 저장됩니다.
+
+- 3. 함수 반환
+IIFE는 multiply 함수를 반환하고, 우리는 이를 triple 변수에 저장했습니다.
+triple은 나중에 인자 x를 받아 x * 3을 계산합니다.
 </details>
