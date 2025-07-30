@@ -80,4 +80,21 @@ Doc3: 안녕 고양이 사자
 - discard_punctuation : true 설정은 구두점 제거 여부입니다. (반가워! → 반가워)
 - lenient : true 설정은 형태소 분석 과정에서 오류 발생시 skip 여부
 
+##### nori tokenizer 사용자 사전
+- nori 토크나이저를 사용하면 특정한 단어가 원하지 않게 분해되는 경우가 있습니다. 이를 대비하여 사용자 사전을 등록해 특정 단어는 토크나이징이 되지 않도록 설정할 수 있다.
+- 사용자 사전은 2가지 방식으로 설정할 수 있습니다.
+1. 직접 JSON에 명시
+2. txt 파일 경로 명시 (대게 이 방법 사용)
+```json
+"tokenizer": {
+    "my_nori_tokenizer": {
+        "type": "nori_tokenizer",
+        "decompound_mode": "mixed",
+        "discard_punctuation": "true",
+        "user_dictionary": "userdict_ko.txt",
+        "lenient": true
+    }
+}
+```
+
 </details>
