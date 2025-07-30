@@ -42,4 +42,41 @@ Doc3: 안녕 고양이 사자
 - 토큰화가 된 토큰에 대해서 후처리 단계
 
 
+#### nori tokenizer 
+
+```json
+{
+
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "my_custom_analyzer": {
+                    "type": "custom",
+                    "char_filter": [],
+                    "tokenizer": "my_nori_tokenizer",
+                    "filter": ["lowercase_filter"]
+                }
+            },
+            "char_filter": {},
+            "tokenizer": {
+                "my_nori_tokenizer": {
+                    "type": "nori_tokenizer",
+          		    "decompound_mode": "mixed",
+          		    "discard_punctuation": "true",
+          		    "lenient": true
+                }
+            },
+            "filter": {
+                "lowercase_filter": {
+                    "type": "lowercase"
+                }
+            }
+        }
+    }
+}
+
+- decompound_mode : mixed 설정은 합성어 처리 방법으로 mixed로 설정하면 합성어를 분해하고 원본 단어도 유지합니다. (가곡역 → 가곡, 역, 가곡역)
+- discard_punctuation : true 설정은 구두점 제거 여부입니다. (반가워! → 반가워)
+- lenient : true 설정은 형태소 분석 과정에서 오류 발생시 skip 여부
+
 </details>
