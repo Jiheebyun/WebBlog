@@ -97,4 +97,57 @@ Doc3: 안녕 고양이 사자
 }
 ```
 
+#### 동의어 사전
+-  “char_filter → tokenizer → token_filter” 과정에서 token_filter는 분해한 토큰을 후처리
+
+- 동의어 필터는 특정 단어를 의미가 비슷한 단어로 치환, 확장  (ex) 책 = 서적 = book
+```json
+"settings": {
+    "analysis": {
+        "analyzer": {
+            "my_custom_analyzer": {
+                "type": "custom",
+                "char_filter": [],
+                "tokenizer": "my_nori_tokenizer",
+                "filter": [
+                    "lowercase_filter",
+                    "synonym_filter" // 필터 추가
+                ]
+            }
+        },
+        "char_filter": {},
+        "tokenizer": {
+            "my_nori_tokenizer": {
+                "type": "nori_tokenizer",
+                "decompound_mode": "mixed",
+                "discard_punctuation": "true",
+                "user_dictionary": "dict/userdict_ko.txt",
+                "lenient": true
+            }
+        },
+        "filter": {
+            "lowercase_filter": {
+                "type": "lowercase"
+            },
+            "synonym_filter": { // 동의어 필터
+                "type": "synonym",
+                "synonyms_path": "dict/synonym-set.txt",
+                "lenient": true
+            }
+        }
+    }
+}
+
+```
+#### 동의어 사전 작성 방법
+```bash
+# "synonyms_path": "dict/synonym-set.txt",
+# 확장 - 특정 토큰에 대해 의미가 비슷한 토큰을 추가로 넣어주는 것
+ipod, i-pod, i pod
+computer, pc, laptop
+# 치환 - 특정 토큰에 대해 의미가 비슷한 토큰을 추가로 넣어주는 것
+personal computer => pc
+sea biscuit, sea biscit => seabiscuit
+
+```
 </details>
