@@ -139,7 +139,7 @@ Doc3: 안녕 고양이 사자
 }
 
 ```
-#### 동의어 사전 작성 방법
+##### 동의어 사전 작성 방법
 ```bash
 # "synonyms_path": "dict/synonym-set.txt",
 # 확장 - 특정 토큰에 대해 의미가 비슷한 토큰을 추가로 넣어주는 것
@@ -152,5 +152,86 @@ sea biscuit, sea biscit => seabiscuit
 ```
 
 
+<<<<<<< HEAD:ElasticSearch/index.md
+=======
+### 한글 복합어 동의어 에러처리 
+
+##### 한국어 복합어 문제
+- nori tokenizer 단계에서 복합어를 mixed(discard)처리를 진행했는데, 이는 복합어를 분리합니다.
+- 문제는 tokenizer에서 "왓"을 "오", "앗"으로 쪼개 버리기때문에 동의어 사전에서 "왓"이라는 단어를 찾을수 없을 -> 매핑 불일치 에러 발생
+- 즉, 동의어 사전에 "왓"을 올려도 실제 분석당께에서는 "왓"이라는 토큰이 존재하지 않으니 필터 적용이 불가능해져서 에러가 발생
+```bash
+# userdict_ko.txt (nori tokenizer)
+신사역 -> 신사 역
+입생로랑 -> 입 생 로랑
+왓 -> 오 앗
+
+# synonym-set.txt
+왓, what
+
+```
+
+##### 해결방향
+
+1. 복합어 처리 방식을 바꾸기
+`decompound_mode`를 `mixed` 대신 `none`으로 설정하여  
+원형을 유지하도록 한다.
+
+```json
+"tokenizer": {
+  "type": "nori_tokenizer",
+  "decompound_mode": "none"
+}
+```
+
+2. keyword_marker 필터사용
+- 지정된 단어를 분리하지 않고 원형 그래도 유지.
+```json
+"analysis": {
+  "analyzer": {
+    "custom_korean": {
+      "tokenizer": "nori_tokenizer",
+      "filter": ["protect_keyword", "my_synonyms"]
+    }
+  },
+  "filter": {
+    "protect_keyword": {
+      "type": "keyword_marker",
+      "keywords": ["왓"]
+    },
+    "my_synonyms": {
+      "type": "synonym",
+      "synonyms": ["왓, what"]
+    }
+  }
+}
+```
+3. Multi-field 매핑
+-  두 개의 방식으로 동시에 색인
+- ex)
+1. title.nori: ["입", "생", "로랑", "오", "앗", "신사", "역"]
+2. title.raw: ["입생로랑 왓 신사역"]
+
+```json
+"mappings": { // 인덱스가 어떤 구조로 문서를 저장할지를 정의하는 부분
+  "properties": { //각 문서(Document)가 가질 필드 목록.
+    "title": {
+      "type": "text",
+      "fields": {
+        "nori": {
+          "type": "text",
+          "analyzer": "nori_mixed"
+        },
+        "raw": {
+          "type": "text",
+          "analyzer": "keyword"
+        }
+      }
+    }
+  }
+}
+```
+
+>>>>>>> a51b1a0 (add elasticSearch):ElasticSearch/ElasticSearch.md
 
 </details>
