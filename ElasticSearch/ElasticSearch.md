@@ -152,9 +152,7 @@ sea biscuit, sea biscit => seabiscuit
 ```
 
 
-<<<<<<< HEAD:ElasticSearch/index.md
-=======
-### 한글 복합어 동의어 에러처리 
+#### 한글 복합어 동의어 에러처리 
 
 ##### 한국어 복합어 문제
 - nori tokenizer 단계에서 복합어를 mixed(discard)처리를 진행했는데, 이는 복합어를 분리합니다.
@@ -232,6 +230,62 @@ sea biscuit, sea biscit => seabiscuit
 }
 ```
 
->>>>>>> a51b1a0 (add elasticSearch):ElasticSearch/ElasticSearch.md
+
+#### CRUD
+- 엘라스틱서치는 모든 작업을 REST하게 API로 제공하고 있기 때문에 API 요청으로 인텍스에 문서를 CURD 할수 있다 
+
+###### POST : https://아이피:9200/인덱스명/_doc
+
+```json
+{
+    "id": "1",
+    "title": "문서1",
+    "content": "문서1 내용",
+    "created": "2025-03-07T00:00:00Z"
+}
+
+```
+
+##### GET : https://아이피:9200/인덱스명/_doc/번호
+##### POST : https://아이피:9200/인덱스명/_doc/번호
+##### DELETE : https://아이피:9200/인덱스명/_doc/번호
+
+
+
+
+#### Bulk API
+
+-  게시판 DB에 담겨 있는 문서를 주기적으로 엘라스틱서치 인덱스에 밀어 넣는 상황이 자주 발생한다. (전체 색인)
+-  이 경우 개별 API를 수천 번씩 실행할 경우 색인이 제대로 생기지 않는 문제가 발생한다.
+-  이 문제를 해결하기 위해서 엘라스틱서치에서는 수천만건의 데이터를 조금씩 묶어서 처리할수 있는 Bulk API를 제공하고 있다.
+
+##### POST : https://아이피:포트/_bulk
+
+##### Body 작성 방법
+- 추가 : index (_id 값이 : 없다면 추가, 있다면 수정)
+
+```json
+{ "index" : { "_index" : "my_index" } }
+{ "id": "1", "title" : "제목1", "content": "내용1", "created": "2025-03-09T00:00:00Z" }
+```
+- 삭제 
+```json
+{ "delete" : { "_index" : "my_index", "_id" : "" } }
+```
+- 수정
+```json
+{ "update" : { "_id" : "1", "_index" : "my_index" } }
+{ "doc" : { "id": "1", "title" : "제목1", "content": "내용1", "created": "2025-03-09T00:00:00Z" } }
+```
+
+##### NDJSON
+- body는 단순 JSON이 아니라 Newline Delimits JSON 이다.
+- - 일반 JSON은 배열([])이나 객체({}) 형태로 묶어서 표현하지만,
+NDJSON은 각 JSON 객체를 줄바꿈(개행)으로 구분하는 형식
+```json
+Content-Type: application/x-ndjson
+```
+-  _bulk API는 Read를 지원하지는 않는다. (_mget 사용)
+- bulk 최대 값은 HTTP 요청 한계 값인 100MB입니다. 다만 100MB를 다 사용하지 않고 1000 ~ 2000개씩 끊어서 요청
 
 </details>
