@@ -288,4 +288,28 @@ Content-Type: application/x-ndjson
 -  _bulk API는 Read를 지원하지는 않는다. (_mget 사용)
 - bulk 최대 값은 HTTP 요청 한계 값인 100MB입니다. 다만 100MB를 다 사용하지 않고 1000 ~ 2000개씩 끊어서 요청
 
+
+#### 전체 색인
+- **색인(Indexing)**: 문서를 검색 가능한 형태로 변환해 Elasticsearch에 저장하는 과정
+- 단순 저장이 아니라, **역색인(Inverted Index)** 구조로 만들어야 검색이 가능
+- **부분 색인(Partial Update)**이 발생하면 Elasticsearch는 내부적으로 **문서 전체를 다시 색인**한다.
+
+##### 동작 원리
+1. 부분 색인 요청 발생 (`_update` API 사용)
+2. Elasticsearch가 기존 문서를 조회
+3. 변경된 필드를 반영하여 **새 문서 전체를 생성**
+4. 새 문서를 색인
+5. 기존 문서는 **삭제 마킹(mark delete)** 처리  
+   → 실제 디스크 삭제는 나중에 segment merge 시점에 수행
+
+##### 왜 그런가?
+- Elasticsearch 문서는 **불변(Immutable)** 구조
+- 역색인(Inverted Index) 때문에 문서 일부만 수정 불가능
+- 따라서 항상 **문서 단위로 교체**해야 함
+
+##### 비유
+> 문서의 한 필드만 고치고 싶어도,  
+> Elasticsearch는 기존 문서를 지우고  
+> 새 문서 전체를 다시 작성한다.
+
 </details>
