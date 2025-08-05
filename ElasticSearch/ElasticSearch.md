@@ -293,7 +293,7 @@ Content-Type: application/x-ndjson
 - **색인(Indexing)**: 문서를 검색 가능한 형태로 변환해 Elasticsearch에 저장하는 과정
 - 단순 저장이 아니라, **역색인(Inverted Index)** 구조로 만들어야 검색이 가능
 - **부분 색인(Partial Update)**이 발생하면 Elasticsearch는 내부적으로 **문서 전체를 다시 색인**한다.
-
+- 전체 색인이 필요 -> 사용자/동의어 사전 변경, 색인 누락
 ##### 동작 원리
 1. 부분 색인 요청 발생 (`_update` API 사용)
 2. Elasticsearch가 기존 문서를 조회
