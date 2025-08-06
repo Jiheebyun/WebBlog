@@ -312,4 +312,41 @@ Content-Type: application/x-ndjson
 > Elasticsearch는 기존 문서를 지우고  
 > 새 문서 전체를 다시 작성한다.
 
+##### 만약 전체 색일을 하는동안 사용자에 의해서 DB에 CRUD가 발생하면?
+- 1. 전체 색인을 시작하는 시점"에 DB가 가진 데이터만 전체 색인을 하도록 설정 (전체 색인 시점 DB 마지막 id 값 이후로 새로 들어온 데이터는 전체 색인 배치에서 제외 함.)
+- 2. 전체 색인 과정에서 발생하는 Create, delete, update는? 전체 색인 과정을 수행하는 도중 신규로 DB에 추가되는 데이터는 WAS 단에서 DB와 ES에 모두에 넣는 방법이 있다. (전체 색인 시작시, 기존 데이터의 마지막 id 값 까지만 진행하도록 설계하여 중복을 방지)
+
+
+##### 매 전체 색인시 색인명이 변경되면, WAS에서 색인명을 변경해야 할까요?
+- 다행이 alias라는게 존재
+- alias는 별칭으로 대표가 되는 이름을 정해두고, 내부적으로 redirect를 진행할 수 있다.
+- API: POST : https://아이피:9200/_aliases
+```json
+// alias 설정
+{
+  "actions": [
+    {
+      "add": {
+        "index": "my-index-날짜",
+        "alias": "my-index"
+      }
+    }
+  ]
+}
+```
+
+```json
+// alias 제거
+{
+  "actions": [
+    {
+      "remove": {
+        "index": "my-index-날짜",
+        "alias": "my-index"
+      }
+    }
+  ]
+}
+```
+
 </details>
