@@ -349,4 +349,27 @@ Content-Type: application/x-ndjson
 }
 ```
 
+##### 검색과 CUD alias 분리
+- 전체 색인을 진행하는 동안 CUD는 새로운 색인, 검색은 신규 색인이 다 만들어지지 않았기 떄문에 기존 색인에 대해 진행
+-  이 문제는 alias를 통해 해결 -> 검색용 alias, CUD용 alias
+##### Elasticsearch Alias를 활용한 무중단 색인 교체 과정 
+-Elasticsearch에서 인덱스 매핑 변경이나 구조 수정을 위해 새로운 인덱스를 생성해야 할 때, 검색(Search)과 CUD(Create, Update, Delete) 작업을 중단하지 않고 전환하는 방법은 alias를 활용하는 것이다. 이 과정을 단계별로 살펴보면 다음과 같다.
+
+1. **검색용 alias와 CUD용 alias가 모두 기존 색인을 가리킴**  
+- 현재 상태에서 검색(alias)인 `search_alias`와 쓰기(alias)인 `write_alias`는 모두 기존 인덱스 `old_index`를 참조한다.  
+
+2. **신규 색인 생성**  
+- 새로운 매핑과 설정을 적용한 `new_index`를 생성한다. 아직 alias와 연결되지 않았으므로 서비스에는 영향이 없다.  
+
+3. **CUD용 alias를 신규 색인으로 전환**  
+- `write_alias`를 `new_index`로 변경하여 이후 생성·수정·삭제 작업이 모두 `new_index`에 반영되도록 한다.  
+
+4. **신규 색인 완료**  
+- 기존 `old_index`의 데이터를 `new_index`로 백필(backfill)하여 최신 상태의 데이터를 준비한다. 이 시점에서 `new_index`에는 최신 데이터가 모두 들어있다.  
+
+5. **검색용 alias를 신규 색인으로 전환**  
+- `search_alias`도 `new_index`를 가리키도록 변경한다. 이제 검색과 쓰기 모두 `new_index`를 사용하게 되며 무중단 전환이 완료된다.  
+
+
+
 </details>
