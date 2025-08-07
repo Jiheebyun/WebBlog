@@ -390,5 +390,50 @@ Content-Type: application/x-ndjson
   - must : 속한 match, term이 AND와 같이 모두 있어야 함
   - should : 속한 match, term이 OR과 같이 하나 이상 있어야 함
   - filter : 속한 match, term이 AND로 모두 있어야 하지만, score는 계산하지 않음
-  - must_not : 속한 match, term이 있다면 검색되지 않음
+  - must_not :  match, term이 하나라도 속해 있다면 검색되지 않음
+
+```json
+// match 쿼리 ->  title에 "제목"이 포함되어 있는 데이터를 검색
+{
+    "query": {
+      "match": {
+        "title": "제목"
+      }
+    }
+}
+```
+```json
+// term 쿼리 -> title이 정확히 "제목 왓"으로 되어있는 데이터를 검색
+{
+    "query": {
+      "term": {
+        "title": "제목 왓"
+      }
+    }
+}
+```
+```json
+// bool 쿼리  
+{
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "match": {
+                        "title": "제목 왓"
+                    }
+                },
+                {
+                    "match": {
+                        "title": "제목 왓"
+                    }
+                }
+            ],
+            "filter": [],
+            "should": [],
+            "must_not": []
+        }
+    }
+}
+```
 </details>
