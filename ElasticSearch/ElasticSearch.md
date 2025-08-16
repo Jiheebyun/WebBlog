@@ -495,6 +495,111 @@ Content-Type: application/x-ndjson
       }
     }
   }
+  ```
 
+#### Nested 필드
+
+- 엘라스틱서치는 nested 필드는 객체를 담을 수 있도록 만들어졌다.
+- 하나의 데이터에 대체서 부가 정보가 리스트에 의존된 경우에 nested 필드를 사용하여 부가를 검색 할 수 있다.
+```json
+{
+   // 하나의 데이터에 부가 정보가 의존된 경우 예) 하나의 노래에 어러명의 가수의 정도를 담아 햘 경우
+  "title": "Something Just Like This",
+  "musicians": [
+    {
+      "name": "The Chainsomkers",
+      "agency": "Disruptor Records00000 "
+    },
+    {
+      "name": "Coldplay",
+      "agency": "워너 뮤직 그룹"
+    }
+  ]
+}
+```
+##### nested 필드 mapping
+
+```json
+{
+    "mappings": {
+        "properties": {
+            "title": { 
+                "type": "text",
+                "analyzer": "my_custom_analyzer"
+            },
+            "musicians": {
+                "type": "nested", // nested라고 명시 
+                "properties": {
+                    "name": { // key 정의
+                        "type": "text",
+                        "analyzer": "my_custom_analyzer"
+                    },
+                    "agency": { // key 정의
+                        "type": "text",
+                        "analyzer": "my_custom_analyzer"
+                    }
+                }
+            }
+        }
+    }
+}
+
+```
+
+##### 데이터 넣기 
+```json
+// API : POST : https://아이피:9200/인덱스/_doc
+{
+  "title": "Something Just Like This",
+  "musicians": [
+    {
+      "name": "The Chainsomkers",
+      "agency": "Disruptor Records00000 "
+    },
+    {
+      "name": "Coldplay",
+      "agency": "워너 뮤직 그룹"
+    }
+  ]
+}
+```
+
+##### nested 검색
+```json
+{
+    "query": {
+        "nested": { //nested 검색
+            "path": "musicians", // 부가 정도에 해당하는 키 값을 path로 지정 
+            "query": {
+                "match": {
+                    "musicians.name": "Something" //musicians에서 해당하는 name 검색
+                }
+            }
+        }
+    }
+}
+// OR
+// bool 검색
+{
+    "query": {
+        "bool": { // bool 검색 
+            "must": [
+                {
+                    "nested": {
+                        "path": "musicians",
+                        "query": {
+                            "match": {
+                                "musicians.name": "Something"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+// 첫 번째 nested 단일 쿼리: 단순히 nested 검색만 수행 (간단, 가볍다).
+// 두 번째 쿼리: bool 구조를 사용 → 여러 조건(must, should, must_not)과 조합 가능 → 확장성 높음.
+```
 
 </details>
