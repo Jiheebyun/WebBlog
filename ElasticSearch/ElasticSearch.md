@@ -602,4 +602,55 @@ Content-Type: application/x-ndjson
 // 두 번째 쿼리: bool 구조를 사용 → 여러 조건(must, should, must_not)과 조합 가능 → 확장성 높음.
 ```
 
+#### Fuzzy Query
+- 사용자가 입력한 검색어에 오타나 철자 오류가 있어도, 유사한 단어를 찾아주는 검색 방식을 Fuzzy Query라고 한다.  
+
+- 예를 들어 저장된 문서 값이 "문서"로 되어있지만, 사용자가 "문사"로 검색을 하게 된다면,
+  - fuzzy 0 : match에 대해 한 글자라도 다르면 못 찾음
+  - fuzzy 1 : match에 대해 한 글자가 달라도 찾음
+  - fuzzy N : match에 대해 N 글자가 달라도 찾음
+```json
+{
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "match": {
+                        "title": {
+                            "query": "문사",
+                            "fuzziness": 0 // 해당 설정 match에 대해 한 글자라도 다르면 못 찾음
+                        }
+                    }
+                }
+            ],
+            "filter": [],
+            "should": [],
+            "must_not": []
+        }
+    }
+}
+// → 문아, 문사, 분사, 아서, 등등 검색이 가능하다 
+```
+
+##### 자동완성
+- 
+
+- 데이터 정의 
+```json
+// POST search-logs/_doc
+{
+  "query_norm": "network"
+}
+```
+- 검색
+```json
+// POST search-logs/_search
+{
+  "query": {
+    "match": {
+      "query_norm.prefix": "net"   // 이제 정상적으로 동작!
+    }
+  }
+}
+```
 </details>
