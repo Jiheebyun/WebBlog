@@ -1,30 +1,80 @@
 <details>
-  <summary>How Redux Works</summary>
+  <summary>How To Use Sotre API</summary>
 
-####  데이터 흐름
+#### actions.ts
 
-- Action: "무슨 일이 일어났다"는 사실을 설명하는 객체 (type 필수)
+```javascript
+// actions.ts
+export const INCREMENT = 'counter/increment' as const
+export const ADD = 'counter/add' as const
 
-- Reducer: state와 action을 받아 새로운 state를 만드는 순수 함수
+export type IncrementAction = { type: typeof INCREMENT }
+export type AddAction = { type: typeof ADD; payload: number }
+export type CounterActions = IncrementAction | AddAction
 
-- Store: state를 보관하고, dispatch/getState/subscribe를 제공하는 중앙 저장소
+export const increment = (): IncrementAction => ({ type: INCREMENT })
+export const add = (value: number): AddAction => ({ type: ADD, payload: value })
 
-##### Action
-- { type: string, payload?: any } 형태의 평범한 JS 객체
-- "사용자가 버튼을 클릭했다", "서버에서 데이터를 받았다" 같은 **이벤트의 종류(type)와 데이터(payload)**를 표현
+```
 
-##### Reducer
-- (state, action) => newState 형태의 순수 함수
-- 순수성: 외부에 영향 X, 같은 입력 → 같은 출력
-- 불변성 유지: 기존 state를 직접 변경하지 말고, 새 객체/배열을 만들어 반환
+#### reducer.ts
+```javascript
+// reducer.ts
+import { INCREMENT, ADD, CounterActions } from './actions'
 
-##### Store
+export type CounterState = { value: number }
+const initialState: CounterState = { value: 0 }
 
-- Redux에서 제공하는 중앙 저장소. createStore (전통), Redux Toolkit의 configureStore(권장)
-- 현재 state 보관
-- dispatch(action)으로 변경 트리거
-- getState()로 현재 state 조회
-- subscribe(listener)로 변경 구독
+export function counterReducer(
+  state: CounterState = initialState,
+  action: CounterActions
+): CounterState {
+  switch (action.type) {
+    case INCREMENT:
+      return { value: state.value + 1 }
+    case ADD:
+      return { value: state.value + action.payload }
+    default:
+      return state
+  }
+}
 
+```
+#### store.ts
+```javascript
+// store.ts
+import { legacy_createStore as createStore, combineReducers } from 'redux'
+import { counterReducer } from './reducer'
+
+const rootReducer = combineReducers({
+  counter: counterReducer,
+})
+
+export const store = createStore(rootReducer)
+
+// 타입 유틸
+export type RootState = ReturnType<typeof rootReducer>
+export type AppDispatch = typeof store.dispatch
+```
+
+
+#### 사용 예시
+```javascript
+// demo.ts (또는 App 초기화 코드 어딘가)
+import { store } from './store'
+import { increment, add } from './actions'
+
+// 현재 상태 스냅샷 얻기
+let state = store.getState()
+console.log('초기값:', state.counter.value) // 0
+
+// 상태 변경
+store.dispatch(increment())
+store.dispatch(add(5))
+
+// 다시 읽기 (스냅샷이므로 재호출 필요)
+state = store.getState()
+console.log('변경 후:', state.counter.value) // 6
+```
 
 </details>
